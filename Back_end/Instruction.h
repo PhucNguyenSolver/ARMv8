@@ -1,9 +1,8 @@
-#ifndef Instruction
-#define Instruction
+#ifndef INSTRUCTION
+#define INSTRUCTION
 
-#include <iostream>
+#include <string>
 #include "Hardware.h"
-using namespace std;
 
 class Instruction
 {
@@ -30,4 +29,4 @@ protected:
     string s;
 };
 
-#endif // !Instruction
+#endif // !INSTRUCTION

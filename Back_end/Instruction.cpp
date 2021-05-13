@@ -1,4 +1,5 @@
 #include "Instruction.h"
+#include <algorithm>
 
 Instruction::Instruction(string s) 
 {

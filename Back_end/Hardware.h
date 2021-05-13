@@ -1,31 +1,16 @@
 #ifndef HARDWARE_H
 #define HARDWARE_H
 
+#include <string>
 #include <map>
-#include "Register.h"
 #include "FloatRegister.h"
+#include "Register.h"
 #include "Memory.h"
 
 class Hardware
 {
 public:
-    class Flags
-    {
-    public:
-        bool eq();
-        bool ne();
-        bool lt();
-        bool le();
-        bool gt();
-        bool ge();
-        bool hs();
-        bool checkOverflow(long a, long b);
-        bool checkFlagCarry(long a, long b);
-
-    private:
-        bool N, Z, C, V;
-    };
-
+    class Flags;
     Hardware(size_t memsize);
     ~Hardware();
     long GetRegister(string reg_name);
@@ -35,6 +20,30 @@ public:
     void setFloatRegister(string reg_name, float value);
     void pushData(string data);
     int indexOf(string reg_name); //TODO: rename this method
+    void log(int bytes = 40);
+    
+public:
+    class Flags
+    {
+        public:
+            Flags();
+            bool eq();
+            bool ne();
+            bool lt();
+            bool le();
+            bool gt();
+            bool ge();
+            bool hs();
+            bool checkOverflow(long a, long b);
+            bool checkFlagCarry(long a, long b);
+            void setN(bool on);
+            void setZ(bool on);
+            void setV(bool on);
+            void setC(bool on);
+
+        private:
+            bool N, Z, C, V;
+    };
 
     int PC;
     Flags flags;
@@ -44,7 +53,7 @@ public:
     Memory *_mem;
 
 private:
-    void log(int bytes = 40);
+    Flags flag;
 };
 
 #endif // !HARDWARE_H

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <limits>
 
@@ -9,13 +10,13 @@
 
 using namespace std;
 
-// void reset() { N = Z = V = C = false; }
-// void setN(bool on) { N = on; }
-// void setZ(bool on) { Z = on; }
-// void setV(bool on) { V = on; }
-// void setC(bool on) { C = on; }
+Hardware::Flags::Flags() { N = Z = V = C = false; }
+void Hardware::Flags::setN(bool on) { N = on; }
+void Hardware::Flags::setZ(bool on) { Z = on; }
+void Hardware::Flags::setV(bool on) { V = on; }
+void Hardware::Flags::setC(bool on) { C = on; }
 
-Hardware::Hardware(size_t memsize)
+Hardware::Hardware(size_t memsize): flags()
 {
     _reg = new Register();
     _floatReg = new FloatRegister();

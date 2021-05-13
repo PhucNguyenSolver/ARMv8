@@ -1,5 +1,3 @@
-#pragma once
-
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -11,7 +9,8 @@ using namespace std;
 inline void LOG(string s){};
 // inline void LOG(string s) { cout << s; };
 
-class PreProcess
+
+class PreProcess // static class
 {
 public:
     enum Mode
