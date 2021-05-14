@@ -1,6 +1,9 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
+#include <string>
+using std::string;
+
 class Memory
 {
 public:

@@ -6,6 +6,7 @@
 #include "FloatRegister.h"
 #include "Register.h"
 #include "Memory.h"
+using std::map;
 
 class Hardware
 {

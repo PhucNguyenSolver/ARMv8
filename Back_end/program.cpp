@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
-using namespace std;
-
-#include "utils.cpp"
-#include "Hardware.cpp"
-#include "Instruction.cpp"
+#include "Instruction.h"
+#include "Hardware.h"
+#include "Utils.h"
+using std::cout;
+using std::endl;
 
 const int MEMORY_SIZE = (int)10e6;
 

@@ -2,8 +2,8 @@
 #include <sstream>
 #include <cstring> // cstring::memmove()
 #include "Memory.h"
-using namespace std;
-
+using std::cout;
+using std::endl;
 
 Memory::Memory(size_t sizeInByte) : size(sizeInByte), top(0) { mem = new char[sizeInByte]; }
 
@@ -22,20 +22,20 @@ void Memory::set(int index, void *source, size_t size)
 
 void Memory::log(int bytes)
 {
-    int lines = min((int)size, bytes);
+    int lines = std::min((int)size, bytes);
     char *readPtr = mem;
     for (int i = 0; i < lines; i++)
     {
         // cout << " | " << *readPtr;
         cout << " | " << (unsigned short)(*readPtr);
         readPtr++;
-        cout << endl;
+        cout << std::endl;
     }
 }
 
 void Memory::loadVariable(string raw)
 {
-    stringstream ss(raw);
+    std::stringstream ss(raw);
     string header;
     ss >> header;
 
@@ -122,7 +122,7 @@ void Memory::loadVariable(string raw)
 
 string Memory::getString(int add)
 {
-    stringstream ss;
+    std::stringstream ss;
     for (int i = 0; i < 100; i++, add++)
     {
         if (this->mem[add] == '\n')

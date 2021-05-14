@@ -4,11 +4,14 @@
 #include <limits>
 
 #include "Hardware.h"
-// #include "memory.h"
-// #include "register.h"
-// #include "FloatRegister.h"
+#include "Memory.h"
+#include "Register.h"
+#include "FloatRegister.h"
 
-using namespace std;
+using std::stringstream;
+using std::cout;
+using std::numeric_limits;
+
 
 Hardware::Flags::Flags() { N = Z = V = C = false; }
 void Hardware::Flags::setN(bool on) { N = on; }
@@ -97,7 +100,7 @@ bool Hardware::Flags::checkOverflow(long a, long b)
 
 bool Hardware::Flags::checkFlagCarry(long a, long b)
 {
-    if ((std::numeric_limits<unsigned long>::max() - (unsigned long)a) < (unsigned long)b)
+    if ((numeric_limits<unsigned long>::max() - (unsigned long)a) < (unsigned long)b)
         return true;
     return false;
 }
