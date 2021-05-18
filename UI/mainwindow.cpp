@@ -30,12 +30,16 @@ void MainWindow::on_RunAll_clicked()
  //  ui->groupBox_3->
     //ui->tableWidget->setItem(0, 0, new QTableWidgetItem(tr("123")));
   //  ui->tableWidget->setItem(0, 1, new QTableWidgetItem(tr("456")));
-    for(int i = 0; i<4; i++)
-       // ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(i*3)).c_str())));
-       ui->tableWidget->item(i,0)->setText(((to_string(i*3)).c_str()));
-   // p.assemble((ui->codeText->toPlainText()).toStdString());
-    QString qstr = QString::fromStdString((ui->codeText->toPlainText()).toStdString());
+//    for(int i = 1; i<4; i++)
+//       // ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(i*3)).c_str())));
+//       ui->tableWidget->item(i,0)->setText(((to_string(i*3)).c_str()));
+    p.setSource((ui->codeText->toPlainText()).toStdString());
+    string s = "false";
+   if(p.assembleSuccessfully()) s = "true";
+    QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
+    p.runAll();
+    //MainWindow::updateRegisterTable();
 }
 
 
@@ -63,11 +67,30 @@ void MainWindow::on_testButton_clicked()
 
 void MainWindow::on_resetButton_clicked()
 {
-   // string s = buffer.str();
-   // buffer.str("");
-    string s ;
-    getline(buffer, s);
-//    string s;
-//    buffer >> s;
-    ui->console->insertPlainText(QString::fromStdString(s));
+    p.reset();
+    MainWindow::updateRegisterTable();
+}
+
+void MainWindow::on_stepButton_clicked()
+{
+    string s = "false\n";
+   if(p.executeSuccessfully(p.getPC())) s = "true\n";
+    QString qstr = QString::fromStdString(s);
+    ui->console->insertPlainText(qstr);
+    MainWindow::updateRegisterTable();
+}
+
+void MainWindow::on_assembleButton_clicked()
+{
+    p.setSource((ui->codeText->toPlainText()).toStdString());
+    string s = "false\n";
+   if(p.assembleSuccessfully()) s = "true\n";
+    QString qstr = QString::fromStdString(s);
+    ui->console->insertPlainText(qstr);
+}
+
+void MainWindow::updateRegisterTable() {
+    for(int i = 0; i<32; i++)
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
+       //ui->tableWidget->item(i,0)->setText(((to_string(i)).c_str()));
 }

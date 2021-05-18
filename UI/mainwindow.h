@@ -37,12 +37,16 @@ public:
     static stringstream buffer;
     static QString getInput();
     //static void getOutput();
-
+    void updateRegisterTable();
 private slots:
 
     void on_RunAll_clicked();
     void on_testButton_clicked();
     void on_resetButton_clicked();
+
+    void on_stepButton_clicked();
+
+    void on_assembleButton_clicked();
 
 private:
     Ui::MainWindow *ui;

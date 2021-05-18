@@ -1,28 +1,33 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
-#include <iostream>
+
+#include <string>
 #include <vector>
-#include "Instruction.h"
 #include "Hardware.h"
-#include "Utils.h"
-using std::cout;
-using std::endl;
+#include "Instruction.h"
 
-const int MEMORY_SIZE = (int)10e6;
-
-class Program
+class Program 
 {
 public:
-    Program();
+    Program(); 
     ~Program();
-    void pushInstruction(string raw);
-    void pushData(string raw);
-    void run();
-    void log();
-    int assemble(string src);
+
+    void setSource(std::string source);
+    bool assembleSuccessfully(); // return true on success
+    bool executeSuccessfully(int instructionId);
+    void runAll();
+    void reset();
+
+    int getPC();
+    long getRegisterValue(int index);
 private:
+    std::string _source;
     Hardware *hardware;
-    vector<Instruction *> instructions;
+    std::vector<Instruction *> instructions;
+    void pushInstruction(std::string raw);
+    void pushData(std::string raw);
+    void log();
 };
 
-#endif // PROGRAM_H
+#endif // !PROGRAM_H
+

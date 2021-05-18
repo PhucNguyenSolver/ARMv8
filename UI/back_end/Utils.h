@@ -31,7 +31,7 @@ public:
         DATA
     };
 
-    PreProcess(string filename) { readFile(filename); }
+    PreProcess(string src) { readTextBox(src); }
     static map<string, int> label; // TODO: why static rather than instant's local
     vector<string> instructions; // TODO: make these variable external and singleton 
     vector<string> data;
