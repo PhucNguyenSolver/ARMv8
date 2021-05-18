@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Register.h"
-using namespace std;
 
 Register::Register()
 {
@@ -20,8 +19,8 @@ void Register::Set(int i, long value)
     // cout << "Update: R" << i << " = " << Get(i) << endl;
 }
 
-void Register::log(int bytes = 40)
+void Register::log(int bytes)
 {
     for (int i = 0; i < 32; i++)
-        cout << "Register " << i << " : " << _Register[i] << endl;
+        std::cout << "Register " << i << " : " << _Register[i] << std::endl;
 }

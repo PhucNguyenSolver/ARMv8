@@ -1,21 +1,25 @@
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <limits>
 
 #include "Hardware.h"
-// #include "memory.h"
-// #include "register.h"
-// #include "FloatRegister.h"
+#include "Memory.h"
+#include "Register.h"
+#include "FloatRegister.h"
 
-using namespace std;
+using std::stringstream;
+using std::cout;
+using std::numeric_limits;
 
-// void reset() { N = Z = V = C = false; }
-// void setN(bool on) { N = on; }
-// void setZ(bool on) { Z = on; }
-// void setV(bool on) { V = on; }
-// void setC(bool on) { C = on; }
 
-Hardware::Hardware(size_t memsize)
+Hardware::Flags::Flags() { N = Z = V = C = false; }
+void Hardware::Flags::setN(bool on) { N = on; }
+void Hardware::Flags::setZ(bool on) { Z = on; }
+void Hardware::Flags::setV(bool on) { V = on; }
+void Hardware::Flags::setC(bool on) { C = on; }
+
+Hardware::Hardware(size_t memsize): flags()
 {
     _reg = new Register();
     _floatReg = new FloatRegister();
@@ -96,7 +100,7 @@ bool Hardware::Flags::checkOverflow(long a, long b)
 
 bool Hardware::Flags::checkFlagCarry(long a, long b)
 {
-    if ((std::numeric_limits<unsigned long>::max() - (unsigned long)a) < (unsigned long)b)
+    if ((numeric_limits<unsigned long>::max() - (unsigned long)a) < (unsigned long)b)
         return true;
     return false;
 }

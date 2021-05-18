@@ -1,6 +1,8 @@
 #include <iostream>
 #include "FloatRegister.h"
-using namespace std;
+
+using std::cout;
+using std::endl;
 
 FloatRegister::FloatRegister()
 {
@@ -20,7 +22,7 @@ void FloatRegister::Set(int i, float value)
     // cout << "Update: R" << i << " = " << Get(i) << endl;
 }
 
-void FloatRegister::log(int bytes = 40)
+void FloatRegister::log(int bytes)
 {
     for (int i = 0; i < 32; i++)
         cout << "Register " << i << " : " << _floatRegister[i] << endl;

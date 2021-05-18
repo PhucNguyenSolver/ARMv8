@@ -1,23 +1,30 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+#include "Utils.h"
 #include "Instruction.h"
+using std::cin;
+using std::cout;
+using std::endl;
 
-Instruction::Instruction(string s) 
+Instruction::Instruction(string s)
 {
     this->s = s;
 }
 
-Instruction::Instruction(Hardware* hardware, string s): hardware(hardware)
+Instruction::Instruction(Hardware *hardware, string s) : hardware(hardware)
 {
     this->s = s;
 }
 
-// #include "utils.cpp"
-// #include <algorithm>
+/*-----------------------------*/
 
 Instruction::IType Instruction::instructionType(string s) // TODO: add defined instruction to sets
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+    vector<string> insWord = Parsing::parseTokens(s);
     vector<string> CBSet{"CBZ", "CBNZ", "B.NE", "B.EQ", "B.LT", "B.LE", "B.GT", "B.GE", "B.HS"};
-    vector<string> RSet{"ADD", "AND", "SUB", "EOR", "LSL", "LSR", "ORR", "AND", "BR", "FADDS", "FCMPS", "FDIVS", "FMULS", "FSUBS", };
+    vector<string> RSet{"ADD","AND","SUB","EOR","LSL","LSR","ORR","AND","BR","FADDS","FCMPS","FDIVS","FMULS","FSUBS"};
     vector<string> ISet{"ADDI", "ANDI", "SUBI", "ADDIS", "ANDIS", "SUBIS", "EORI", "ORRI"};
     vector<string> DSet{"LDUR", "LDURB", "LDURH", "LDURSW", "LDXR", "STUR", "STURB", "LDURH", "LDURSW", "LDXR"};
     // 10 types
@@ -36,84 +43,56 @@ Instruction::IType Instruction::instructionType(string s) // TODO: add defined i
     else if (find(PISet.begin(), PISet.end(), insWord[0]) != PISet.end())
         return IType::PI;
     else if (insWord[0] == "syscall")
-        return IType::Syscall; // Newwwwwwwww
+        return IType::Syscall;
     else
         throw "Undefined instruction";
 }
 
-class RInstruction : public Instruction
-{
-public:
-    RInstruction(string s) : Instruction(s) {}
-    RInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {} // New constructor
-    void execute();
-    void setFlags(long res, long a, long b)
-    {
-        if (res < 0)
-            hardware->flags.setN(true);
-        else if (res == 0)
-            hardware->flags.setZ(true);
-        if (hardware->flags.checkOverflow(a, b))
-            hardware->flags.setC(true);
-        if (hardware->flags.checkFlagCarry(a, b))
-            hardware->flags.setV(true);
-    }
-    ~RInstruction() {}
-};
+/*-----------------------------*/
 
-class IInstruction : public Instruction
+void RInstruction::setFlags(long res, long a, long b)
 {
-public:
-    IInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {} // New constructor
-    void execute();
-    void setFlags(long res, long a, long b)
-    {
-        if (res < 0)
-            hardware->flags.setN(true);
-        else if (res == 0)
-            hardware->flags.setZ(true);
-        if (hardware->flags.checkOverflow(a, b))
-            hardware->flags.setC(true);
-        if (hardware->flags.checkFlagCarry(a, b))
-            hardware->flags.setV(true);
-    }
-    ~IInstruction() {}
-};
+    if (res < 0)
+        hardware->flags.setN(true);
+    else if (res == 0)
+        hardware->flags.setZ(true);
+    if (hardware->flags.checkOverflow(a, b))
+        hardware->flags.setC(true);
+    if (hardware->flags.checkFlagCarry(a, b))
+        hardware->flags.setV(true);
+}
 
-class DInstruction : public Instruction
-{
-public:
-    DInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-    void execute();
-    void toggle(char *start, int n);
-    void Load(char *des, char *source, int n, bool wide_sign, int size);
-    void Store(char *des, char *source, int n, int size)
-    {
-        for (int i = 0; i < n; i++)
-            *(des + i) = *(source + size - n + i);
-    }
-    ~DInstruction() {}
-};
+// RInstruction::RInstruction(string s) : Instruction(s) {}
+// RInstruction::RInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
 
-class BInstruction : public Instruction
-{
-public:
-    BInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-    void execute();
-    ~BInstruction() {}
-};
+/*-----------------------------*/
 
-class CBInstruction : public Instruction
+void IInstruction::setFlags(long res, long a, long b)
 {
-public:
-    CBInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-    void execute();
-    ~CBInstruction() {}
-};
+    if (res < 0)
+        hardware->flags.setN(true);
+    else if (res == 0)
+        hardware->flags.setZ(true);
+    if (hardware->flags.checkOverflow(a, b))
+        hardware->flags.setC(true);
+    if (hardware->flags.checkFlagCarry(a, b))
+        hardware->flags.setV(true);
+}
+
+/*-----------------------------*/
+
+void DInstruction::Store(char *des, char *source, int n, int size)
+{
+    for (int i = 0; i < n; i++)
+        *(des + i) = *(source + size - n + i);
+}
+
+/*-----------------------------*/
 
 void RInstruction::execute()
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+
+    vector<string> insWord = Parsing::parseTokens(s);
     if (!insWord[0].compare("ADD") || !insWord[0].compare("ADDS"))
     {
         hardware->SetRegister(insWord[1], hardware->GetRegister(insWord[2]) + hardware->GetRegister(insWord[3]));
@@ -145,7 +124,7 @@ void RInstruction::execute()
     else if (!insWord[0].compare("BR"))
         hardware->PC = hardware->GetRegister(insWord[1]);
 
-    //update float instructions    
+    //update float instructions
     else if (!insWord[0].compare("FADDS"))
         hardware->setFloatRegister(insWord[1], hardware->getFloatRegister(insWord[2]) + hardware->getFloatRegister(insWord[3]));
     else if (!insWord[0].compare("FSUBS"))
@@ -158,7 +137,7 @@ void RInstruction::execute()
 
 void IInstruction::execute()
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+    vector<string> insWord = Parsing::parseTokens(s);
     if (!insWord[0].compare("ADDI") || !insWord[0].compare("ADDIS"))
     {
         hardware->SetRegister(insWord[1], hardware->GetRegister(insWord[2]) + stoi(insWord[3]));
@@ -185,7 +164,7 @@ void IInstruction::execute()
 
 void BInstruction::execute()
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+    vector<string> insWord = Parsing::parseTokens(s);
     if (!insWord[0].compare("B"))
     {
         hardware->PC = PreProcess::label[insWord[1]];
@@ -201,7 +180,7 @@ void BInstruction::execute()
 // TODO: test LDUR - offset in byte
 void CBInstruction::execute()
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+    vector<string> insWord = Parsing::parseTokens(s);
     string command = insWord[0];
     if (command == "CBZ")
     {
@@ -223,11 +202,13 @@ void CBInstruction::execute()
         hardware->PC = PreProcess::label[insWord[1]];
 }
 
+/*-----------------------------*/
+
 void DInstruction::toggle(char *start, int n)
 {
     for (int i = 0; i < n / 2; i++)
     {
-        swap(start[i], start[n - i - 1]);
+        std::swap(start[i], start[n - i - 1]);
     }
 }
 
@@ -246,9 +227,10 @@ void DInstruction::Load(char *des, char *source, int n, bool wide_sign, int size
     }
     this->toggle(des, size);
 }
+
 void DInstruction::execute()
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+    vector<string> insWord = Parsing::parseTokens(s);
     if (!insWord[0].compare("LDUR"))
     {
         if (hardware->_data.find(insWord[2]) != hardware->_data.end())
@@ -344,28 +326,39 @@ void DInstruction::execute()
         cout << 0;
 }
 
-class PIInstruction : public DInstruction
+/*-----------------------------*/
+
+RInstruction    ::RInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
+IInstruction    ::IInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
+DInstruction    ::DInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
+BInstruction    ::BInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
+CBInstruction   ::CBInstruction (Hardware *hardware, string s): Instruction(hardware, s) {}
+PIInstruction   ::PIInstruction (Hardware *hardware, string s): DInstruction(hardware, s) {}
+SyscallInstruction::SyscallInstruction(Hardware *hardware, string s): Instruction(hardware, s) {}
+
+RInstruction    ::RInstruction  (string s): Instruction(s) {}
+IInstruction    ::IInstruction  (string s): Instruction(s) {}
+DInstruction    ::DInstruction  (string s): Instruction(s) {}
+BInstruction    ::BInstruction  (string s): Instruction(s) {}
+CBInstruction   ::CBInstruction (string s): Instruction(s) {}
+PIInstruction   ::PIInstruction (string s): DInstruction(s) {}
+SyscallInstruction::SyscallInstruction(string s): Instruction(s) {}
+
+void PIInstruction::setFlags(long res, long a, long b)
 {
-public:
-    PIInstruction(Hardware *hardware, string s) : DInstruction(hardware, s) {} // New constructor
-    void execute();
-    void setFlags(long res, long a, long b)
-    {
-        if (res < 0)
-            hardware->flags.setN(true);
-        else if (res == 0)
-            hardware->flags.setZ(true);
-        if (hardware->flags.checkOverflow(a, b))
-            hardware->flags.setC(true);
-        if (hardware->flags.checkFlagCarry(a, b))
-            hardware->flags.setV(true);
-    }
-    ~PIInstruction() {}
-};
+    if (res < 0)
+        hardware->flags.setN(true);
+    else if (res == 0)
+        hardware->flags.setZ(true);
+    if (hardware->flags.checkOverflow(a, b))
+        hardware->flags.setC(true);
+    if (hardware->flags.checkFlagCarry(a, b))
+        hardware->flags.setV(true);
+}
 
 void PIInstruction::execute()
 {
-    vector<string> insWord = PreProcess::parseTokens(s);
+    vector<string> insWord = Parsing::parseTokens(s);
     if (!insWord[0].compare("CMP"))
     {
         long tempregister;
@@ -401,13 +394,7 @@ void PIInstruction::execute()
     }
 }
 
-class SyscallInstruction : public Instruction
-{
-public:
-    SyscallInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-    void execute();
-    ~SyscallInstruction() {}
-};
+/*-----------------------------*/
 
 void SyscallInstruction::execute()
 {
@@ -442,7 +429,7 @@ void SyscallInstruction::execute()
         string read_value;
         getline(cin, read_value);
         hardware->SetRegister("X2", read_value.length());
-        string raw = (string)".asciz" + (string)" \"" + read_value + (string)"\" ";
+        string raw = (string) ".asciz" + (string) " \"" + read_value + (string) "\" ";
         hardware->SetRegister("X1", hardware->_mem->getTop());
         hardware->_mem->loadVariable(raw);
     }

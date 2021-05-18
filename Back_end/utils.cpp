@@ -1,42 +1,21 @@
-#pragma once
-
 #include <iostream>
 #include <fstream>
 #include <cstring>
 #include <sstream>
 #include <map>
 #include <vector>
-using namespace std;
+#include "Utils.h"
 
-inline void LOG(string s){};
-// inline void LOG(string s) { cout << s; };
+using std::stringstream;
+using std::ifstream;
+using std::ios;
+using std::cout;
+using std::endl;
 
-class PreProcess
-{
-public:
-    enum Mode
-    {
-        NONE,
-        GLOBAL,
-        FUNC,
-        DATA
-    };
-
-    PreProcess(string filename) { readFile(filename); }
-    vector<string> instructions;
-    vector<string> data;
-    static map<string, int> label;
-
-    static vector<string> parseTokens(string _instruction);
-    static string parseQuote(string _instruction);
-
-private:
-    void readFile(string filename);
-};
 
 map<string, int> PreProcess::label;
-
-vector<string> PreProcess::parseTokens(string _instruction)
+/*-----------------------------*/
+vector<string> Parsing::parseTokens(string _instruction)
 {
     vector<string> out;
     int length = _instruction.length();
@@ -52,8 +31,8 @@ vector<string> PreProcess::parseTokens(string _instruction)
         out.push_back(getW);
     return out;
 }
-
-string PreProcess::parseQuote(string _instruction)
+/*-----------------------------*/
+string Parsing::parseQuote(string _instruction)
 {
     string str = "";
     int begin = (int)_instruction.find('\"');
@@ -61,7 +40,7 @@ string PreProcess::parseQuote(string _instruction)
     str = _instruction.substr(begin + 1, end - begin - 1);
     return str;
 }
-
+/*-----------------------------*/
 void PreProcess::readFile(string filename)
 {
     ifstream inFile(filename, ios::binary);
@@ -71,8 +50,7 @@ void PreProcess::readFile(string filename)
     {
         string line;
         getline(inFile, line);
-        // cout << line << endl;
-        vector<string> tokens = parseTokens(line);
+        vector<string> tokens = Parsing::parseTokens(line);
 
         if (!tokens.empty())
         {
@@ -118,7 +96,7 @@ void PreProcess::readFile(string filename)
                 int pos = (int)temp.find("@");
                 temp.erase(temp.begin() + pos, temp.end());
             }
-            tokens = parseTokens(temp);
+            tokens = Parsing::parseTokens(temp);
             if (!tokens.empty() && tokens[0] != ".data") // fix this
                 data.push_back(temp);
             break;
@@ -138,7 +116,7 @@ void PreProcess::readFile(string filename)
             {
                 int pos = (int)temp.find(':');
                 string labelName = temp.substr(0, pos);
-                labelName = parseTokens(labelName)[0];
+                labelName = Parsing::parseTokens(labelName)[0];
                 label.insert({labelName, instructions.size()});
                 temp.erase(temp.begin(), temp.begin() + pos + 1);
             }
@@ -152,27 +130,26 @@ void PreProcess::readFile(string filename)
                 int pos = (int)temp.find(",");
                 temp[pos] = ' ';
             }
-            if (!parseTokens(temp).empty() && tokens[0] != ".func")
+            if (!Parsing::parseTokens(temp).empty() && tokens[0] != ".func")
                 instructions.push_back(temp);
             break;
         }
     }
     inFile.close();
 }
-
-template <class T>
-void logVector(vector<T> vect)
+/*-----------------------------*/
+// template <class T>
+void logVector(vector<string> vect)
 {
     cout << vect.size() << ":\n";
     for (auto i : vect)
         cout << " | " << i << endl;
 }
-
 /*
 void testparse()
 {
     string s = "* @author\" Christopher D. McMur\"rough";
-    logVector(PreProcess::parseTokens(s));
+    logVector(Parsing::parseTokens(s));
     cout <<  PreProcess::parseQuote(s) << endl;
 }
 
