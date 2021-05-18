@@ -19,6 +19,7 @@ public:
     void reset();
 
     int getPC();
+    long getRegisterValue(int index);
 
 private:
     std::string _source;

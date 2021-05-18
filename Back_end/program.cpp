@@ -70,7 +70,7 @@ bool Program::executeSuccessfully(int instructionId)
     if (0 <= PC && PC < (int)instructions.size())
     {
         hardware->PC++;   
-        instructions[PC - 1]->execute();
+        instructions[getPC() - 1]->execute();
         return true;
     }
     else
@@ -129,4 +129,9 @@ void Program::log()
 {
     cout << "Hardware Log\n";
     hardware->log();
+}
+
+long Program::getRegisterValue(int index)
+{
+    return hardware->_reg->Get(index);
 }
