@@ -38,6 +38,7 @@ public:
 
 private:
     void readFile(string filename);
+    void readTextBox(string text);
 };
 
 // template <class T> // TODO: how to use template here - undefined reference
