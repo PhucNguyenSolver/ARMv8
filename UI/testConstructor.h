@@ -6,6 +6,7 @@ class Test {
 public:
     Test();
     QString testGetInput();
+    void testOutput();
 private:
     int id;
 };

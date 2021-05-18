@@ -14,6 +14,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QString MainWindow::getInput() {
+    QString text = "";
+    while (text == "")
+    text = QInputDialog::getText(new MainWindow(), tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
+    return text;
+}
+
+stringstream MainWindow::buffer;
+
 
 
 void MainWindow::on_RunAll_clicked()
@@ -44,16 +53,21 @@ void MainWindow::on_testButton_clicked()
     //        ui->console->insertPlainText((to_string(i)).c_str());
     //    }
         //a->show();
-    for (int i = 0; i<10; i++) {
-    QString input = t.testGetInput();
-    ui->console->insertPlainText(input);
-    }
-
+//    for (int i = 0; i<10; i++) {
+//    QString input = t.testGetInput();
+//    ui->console->insertPlainText(input);
+//    }
+    t.testOutput();
 }
 
-QString MainWindow::getInput() {
-    QString text = "";
-    while (text == "")
-    text = QInputDialog::getText(new MainWindow(), tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
-    return text;
+
+void MainWindow::on_resetButton_clicked()
+{
+   // string s = buffer.str();
+   // buffer.str("");
+    string s ;
+    getline(buffer, s);
+//    string s;
+//    buffer >> s;
+    ui->console->insertPlainText(QString::fromStdString(s));
 }

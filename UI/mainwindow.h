@@ -21,7 +21,7 @@
 #include "back_end/Program.h"
 //>>>>>>> ad5a9568f681aa045900787ac5ba772d64298af2
 #include "testConstructor.h"
-
+#include <sstream>
 using namespace std;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,12 +34,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    static stringstream buffer;
     static QString getInput();
+    //static void getOutput();
 
 private slots:
 
     void on_RunAll_clicked();
     void on_testButton_clicked();
+    void on_resetButton_clicked();
 
 private:
     Ui::MainWindow *ui;
