@@ -1,11 +1,10 @@
-DEP_LIST := FloatRegister.h   Hardware.h   Instruction.h   Memory.h   Program.h   Register.h   Utils.h 
-DEP_LIST := FloatRegister.cpp Hardware.cpp Instruction.cpp Memory.cpp Program.cpp Register.cpp Utils.cpp
+DEP_LIST := FloatRegister.o Hardware.o Instruction.o Memory.o Program.o Register.o Utils.o 
 
 
-all:	
-	g++ -o app $(DEP_LIST)
+all: $(DEP_LIST) test.o
+	g++ -o app $(DEP_LIST) test.o
 
-%.o: %.cpp %.h
+%.o: %.cpp
 	g++ -c -o $@ $<
 
 clean:
