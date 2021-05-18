@@ -14,19 +14,26 @@ SOURCES += \
     back_end/testConstructor.cpp \
     main.cpp \
     mainwindow.cpp \
-#    back_end/FloatRegister.cpp \
-#    back_end/Hardware.cpp \
-#    back_end/Instruction.cpp \
-#    back_end/memory.cpp \
-#    back_end/program.cpp \
-#    back_end/register.cpp \
-#    back_end/utils.cpp
+    back_end/FloatRegister.cpp \
+    back_end/Hardware.cpp \
+    back_end/Instruction.cpp \
+    back_end/memory.cpp \
+    back_end/program.cpp \
+    back_end/register.cpp \
+    back_end/utils.cpp
 
 HEADERS += \
     CodeEditor.h \
     LineNumberArea.h \
+    back_end/Program.h \
     mainwindow.h \
-    testConstructor.h
+    testConstructor.h \
+    back_end/FloatRegister.h \
+    back_end/Hardware.h \
+    back_end/Instruction.h \
+    back_end/Memory.h \
+    back_end/Register.h \
+    back_end/Utils.h
 
 FORMS += \
     mainwindow.ui

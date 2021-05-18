@@ -4,7 +4,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), t()
+    , ui(new Ui::MainWindow), t(), p()
 {
     ui->setupUi(this);
 }
@@ -24,6 +24,9 @@ void MainWindow::on_RunAll_clicked()
     for(int i = 0; i<4; i++)
        // ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(i*3)).c_str())));
        ui->tableWidget->item(i,0)->setText(((to_string(i*3)).c_str()));
+   // p.assemble((ui->codeText->toPlainText()).toStdString());
+    QString qstr = QString::fromStdString((ui->codeText->toPlainText()).toStdString());
+    ui->console->insertPlainText(qstr);
 }
 
 

@@ -18,7 +18,7 @@
 //<<<<<<< HEAD
 #include <QInputDialog>
 //=======
-//#include "back_end/program.cpp"
+#include "back_end/Program.h"
 //>>>>>>> ad5a9568f681aa045900787ac5ba772d64298af2
 #include "testConstructor.h"
 
@@ -44,5 +44,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Test t;
+    Program p;
 };
 #endif // MAINWINDOW_H
