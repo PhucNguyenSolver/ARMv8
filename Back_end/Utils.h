@@ -44,4 +44,6 @@ private:
 // template <class T> // TODO: how to use template here - undefined reference
 void logVector(vector<string> vect);
 
+long sys_rand(); // rand_64
+
 #endif // !UTILS_H

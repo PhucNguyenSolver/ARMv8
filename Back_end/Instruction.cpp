@@ -2,6 +2,13 @@
 #include <iostream>
 #include <algorithm>
 
+#include <chrono>
+#include <thread>
+#include <sstream>
+#include <bitset>
+#include <climits>
+using namespace std;
+
 #include "Utils.h"
 #include "Instruction.h"
 using std::cin;
@@ -402,32 +409,50 @@ void SyscallInstruction::execute()
     if (value == 1)
     {
         long print_value = hardware->GetRegister("X1");
+        // MainWindow::buffer << print_value;
         cout << print_value;
+        // MainWindow::printOutput();
     }
-    else if (value == 2)
+    else if (value == 2) {
+        // MainWindow::buffer << "float print";
         cout << "float print";
-    else if (value == 3)
+        // MainWindow::printOutput();
+    }
+    else if (value == 3) {
+        // MainWindow::buffer << "double print";
         cout << "double print";
+        // MainWindow::printOutput();
+    }
     else if (value == 4)
     {
         int index = (int)hardware->GetRegister("X1");
-        string print_value = hardware->_mem->getString(index);
-        cout << "\nsyscall 8 print string: " << print_value << endl;
+        string print_value = "";
+        print_value = hardware->_mem->getString(index);
+        // MainWindow::buffer << "\nsyscall 8 print string: " << print_value << endl;
+        cout << "\nSyscall 4 print string: " << print_value << endl;
+        // MainWindow::printOutput();
     }
     else if (value == 5)
     {
         long read_value;
+        // read_value = (MainWindow::getInput()).toLong();
         cin >> read_value;
         hardware->SetRegister("X0", read_value);
     }
-    else if (value == 6)
+    else if (value == 6) {
         cout << "read float";
-    else if (value == 7)
+    }
+    else if (value == 7) {
         cout << "read double";
+    }
     else if (value == 8)
     {
         string read_value;
-        getline(cin, read_value);
+        // read_value = (MainWindow::getInput()).toStdString();
+        cin >> read_value;
+        // MainWindow::buffer << read_value;
+        cout << read_value;
+        // MainWindow::printOutput();
         hardware->SetRegister("X2", read_value.length());
         string raw = (string) ".asciz" + (string) " \"" + read_value + (string) "\" ";
         hardware->SetRegister("X1", hardware->_mem->getTop());
@@ -438,12 +463,90 @@ void SyscallInstruction::execute()
     else if (value == 11)
     {
         long print_value = hardware->GetRegister("X1");
-        cout << (char)print_value;
+        // MainWindow::buffer << print_value;
+        // MainWindow::printOutput();
+        cout << print_value;
     }
     else if (value == 12)
     {
         char read_value;
-        cin.get(read_value);
+        // read_value = (MainWindow::getInput()).toStdString().c_str()[0];
+        cin >> read_value;
         hardware->SetRegister("X0", (long)read_value);
     }
+    
+    /*------------------*/
+    else if (value == 30) // sys_get_time
+    {
+        chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
+        chrono::system_clock::now().time_since_epoch());
+        unsigned long msCount = ms.count();
+
+        long msb = msCount >> 32;
+        long lsb = msCount << 32 >> 32;
+        // cout << msb << " | "<< lsb  << endl;
+        hardware->SetRegister("X0", lsb);
+        hardware->SetRegister("X1", msb);
+    }
+    else if (value == 32) // sys_sleep
+    {
+        long miliseconds = hardware->GetRegister("X0");
+        this_thread::sleep_for(chrono::milliseconds(miliseconds));
+    }
+    else if (value == 34) // sys_int2hex
+    {
+        long n = hardware->GetRegister("X0");
+        char cstr[128];
+        sprintf(cstr, "%#010x", n);
+        string out = cstr;
+        // MainWindow::buffer << print_value;
+        // MainWindow::printOutput();
+        cout << out;
+    }
+    else if (value == 35) // sys_int2bin
+    {
+        long n = hardware->GetRegister("X0");
+        bitset<32> a(n);
+        string out = a.to_string();
+        // MainWindow::buffer << print_value;
+        // MainWindow::printOutput();
+        cout << out;
+    }
+    else if (value == 36) // sys_int2unsigned
+    {
+        long n = hardware->GetRegister("X0");
+        unsigned long *cast = (unsigned long *)(&n);
+        string out = to_string((unsigned long) (*cast));
+        // MainWindow::buffer << print_value;
+        // MainWindow::printOutput();
+        cout << out;
+    }
+    else if (value == 40) // sys_set_seed
+    {
+        long seed = hardware->GetRegister("X0");
+        srand(seed);
+    }
+    else if (value == 41) // sys_rand
+    {
+        long out = sys_rand();
+        hardware->SetRegister("X0", out);
+    }
+    else if (value == 42) // sys_rand_range
+    { 
+        unsigned long upperBound = hardware->GetRegister("X1");
+        long out = sys_rand() % upperBound;
+        hardware->SetRegister("X0", out);
+    }
+    else if (value == 43) // sys_rand_f
+    {
+        float out = (float) rand() / RAND_MAX;
+        hardware->setFloatRegister("F0", out); // TODO: check this
+    }
+    else if (value == 44) // sys_rand_d
+    {
+        float out = (double)sys_rand() / LLONG_MAX; 
+        hardware->setFloatRegister("F0", out); // TODO: check this
+    }
+    else
+        throw "Unknown system call";
 }

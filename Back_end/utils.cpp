@@ -4,13 +4,20 @@
 #include <sstream>
 #include <map>
 #include <vector>
-#include "Utils.h"
-
 using std::stringstream;
 using std::ifstream;
 using std::ios;
 using std::cout;
 using std::endl;
+
+#include <chrono>
+#include <thread>
+#include <bitset>
+#include <climits>
+using namespace std;
+
+#include "Utils.h"
+
 
 
 map<string, int> PreProcess::label;
@@ -241,6 +248,13 @@ void logVector(vector<string> vect)
     for (auto i : vect)
         cout << " | " << i << endl;
 }
+
+/*-----------------------------*/
+long sys_rand()
+{
+    return ((long)rand() << 32) | rand();
+}
+
 /*
 void testparse()
 {
