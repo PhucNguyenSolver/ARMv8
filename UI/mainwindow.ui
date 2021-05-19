@@ -41,7 +41,7 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>680</x>
+       <x>670</x>
        <y>10</y>
        <width>561</width>
        <height>571</height>
@@ -53,9 +53,9 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>30</x>
         <y>110</y>
-        <width>151</width>
+        <width>141</width>
         <height>451</height>
        </rect>
       </property>
@@ -85,6 +85,9 @@
       </attribute>
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>30</number>
       </attribute>
       <row/>
       <row/>
@@ -120,9 +123,195 @@
       <row/>
       <column>
        <property name="text">
+        <string>Name</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Values</string>
        </property>
       </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>X0</string>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>true</kerning>
+        </font>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>X1</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>X2</string>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string>X3</string>
+       </property>
+      </item>
+      <item row="4" column="0">
+       <property name="text">
+        <string>X4</string>
+       </property>
+      </item>
+      <item row="5" column="0">
+       <property name="text">
+        <string>X5</string>
+       </property>
+      </item>
+      <item row="6" column="0">
+       <property name="text">
+        <string>X6</string>
+       </property>
+      </item>
+      <item row="7" column="0">
+       <property name="text">
+        <string>X7</string>
+       </property>
+      </item>
+      <item row="8" column="0">
+       <property name="text">
+        <string>X8</string>
+       </property>
+      </item>
+      <item row="9" column="0">
+       <property name="text">
+        <string>X9</string>
+       </property>
+      </item>
+      <item row="10" column="0">
+       <property name="text">
+        <string>X10</string>
+       </property>
+      </item>
+      <item row="11" column="0">
+       <property name="text">
+        <string>X11</string>
+       </property>
+      </item>
+      <item row="12" column="0">
+       <property name="text">
+        <string>X12</string>
+       </property>
+      </item>
+      <item row="13" column="0">
+       <property name="text">
+        <string>X13</string>
+       </property>
+      </item>
+      <item row="14" column="0">
+       <property name="text">
+        <string>X14</string>
+       </property>
+      </item>
+      <item row="15" column="0">
+       <property name="text">
+        <string>X15</string>
+       </property>
+      </item>
+      <item row="16" column="0">
+       <property name="text">
+        <string>X16</string>
+       </property>
+      </item>
+      <item row="17" column="0">
+       <property name="text">
+        <string>X17</string>
+       </property>
+      </item>
+      <item row="18" column="0">
+       <property name="text">
+        <string>X18</string>
+       </property>
+      </item>
+      <item row="19" column="0">
+       <property name="text">
+        <string>X19</string>
+       </property>
+      </item>
+      <item row="20" column="0">
+       <property name="text">
+        <string>X20</string>
+       </property>
+      </item>
+      <item row="21" column="0">
+       <property name="text">
+        <string>X21</string>
+       </property>
+      </item>
+      <item row="22" column="0">
+       <property name="text">
+        <string>X22</string>
+       </property>
+      </item>
+      <item row="23" column="0">
+       <property name="text">
+        <string>X23</string>
+       </property>
+      </item>
+      <item row="24" column="0">
+       <property name="text">
+        <string>X24</string>
+       </property>
+      </item>
+      <item row="25" column="0">
+       <property name="text">
+        <string>X25</string>
+       </property>
+      </item>
+      <item row="26" column="0">
+       <property name="text">
+        <string>X26</string>
+       </property>
+      </item>
+      <item row="27" column="0">
+       <property name="text">
+        <string>X27</string>
+       </property>
+      </item>
+      <item row="28" column="0">
+       <property name="text">
+        <string>SP</string>
+       </property>
+      </item>
+      <item row="29" column="0">
+       <property name="text">
+        <string>FP</string>
+       </property>
+      </item>
+      <item row="30" column="0">
+       <property name="text">
+        <string>LR</string>
+       </property>
+      </item>
+      <item row="31" column="0">
+       <property name="text">
+        <string>XZR</string>
+       </property>
+      </item>
      </widget>
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">
@@ -370,7 +559,12 @@
        <bool>true</bool>
       </property>
      </widget>
+     <zorder>groupBox_2</zorder>
+     <zorder>console</zorder>
+     <zorder>codeText</zorder>
     </widget>
+    <zorder>groupBox_4</zorder>
+    <zorder>groupBox_3</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -379,7 +573,7 @@
      <x>0</x>
      <y>0</y>
      <width>1288</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

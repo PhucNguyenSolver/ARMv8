@@ -45,6 +45,7 @@ void PreProcess::readFile(string filename)
 {
     ifstream inFile(filename, ios::binary);
     Mode mode = NONE;
+    int indexLine = 0;
 
     while (!inFile.eof())
     {
@@ -130,10 +131,13 @@ void PreProcess::readFile(string filename)
                 int pos = (int)temp.find(",");
                 temp[pos] = ' ';
             }
-            if (!Parsing::parseTokens(temp).empty() && tokens[0] != ".func")
+            if (!Parsing::parseTokens(temp).empty() && tokens[0] != ".func") {
                 instructions.push_back(temp);
+                lineNumber.push_back(indexLine);
+            }
             break;
         }
+        indexLine++;
     }
     inFile.close();
 }
@@ -142,6 +146,7 @@ void PreProcess::readTextBox(string text)
 {
     std::istringstream inFile(text);
     Mode mode = NONE;
+    int indexLine = 0;
 
     while (!inFile.eof())
     {
@@ -222,15 +227,18 @@ void PreProcess::readTextBox(string text)
                 int pos = (int)temp.find("#");
                 temp.erase(pos, 1);
             }
-            while ((int)temp.find(",") != -1)
+            while((int)temp.find(",") != -1)
             {
                 int pos = (int)temp.find(",");
                 temp[pos] = ' ';
             }
-            if (!Parsing::parseTokens(temp).empty() && tokens[0] != ".func")
+            if (!Parsing::parseTokens(temp).empty() && tokens[0] != ".func") {
                 instructions.push_back(temp);
+                lineNumber.push_back(indexLine);
+            }
             break;
         }
+        indexLine++;
     }
 }
 /*-----------------------------*/

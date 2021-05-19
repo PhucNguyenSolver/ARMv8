@@ -48,16 +48,18 @@ bool Program::assembleSuccessfully()
 // #endif
 
     // Load instruction
-    for (string ins : source.instructions)
+    int size = source.instructions.size();
+    for (int i=0; i < size; i++)
     {
         try
         {
-            this->pushInstruction(ins);
+            this->pushInstruction(source.instructions[i]);
+            this->pushLineNumber(source.lineNumber[i]);
         }
         catch (...)
         {
             cout << "Unknown instruction: \n"
-                 << ins;
+                 << source.instructions[i];
             return false;
         }
     }
@@ -121,6 +123,10 @@ void Program::pushInstruction(string raw)
         throw "Invalid instruction";
 }
 
+void Program::pushLineNumber(int i) {
+    lineNumber.push_back(i);
+}
+
 void Program::pushData(string raw)
 {
     hardware->pushData(raw);
@@ -134,4 +140,8 @@ void Program::log()
 
 long Program::getRegisterValue(int index) {
     return hardware->_reg->Get(index);
+}
+
+int Program::getLineNumber(int index) {
+    return lineNumber[index];
 }

@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , /*ui(new Ui::MainWindow),*/ t(), p()
 {
     ui->setupUi(this);
+    ui->tableWidget->setColumnWidth(0, 50);
+    ui->tableWidget->setColumnWidth(1, 70);
     //QObject::connect(this, SIGNAL(getOutputSignal()), this, SLOT(printOutput()));
 }
 
@@ -65,7 +67,7 @@ void MainWindow::on_RunAll_clicked()
 //       ui->tableWidget->item(i,0)->setText(((to_string(i*3)).c_str()));
     p.setSource((ui->codeText->toPlainText()).toStdString());
     string s = "false";
-   if(p.assembleSuccessfully()) s = "true";
+    if(p.assembleSuccessfully()) s = "true";
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     p.runAll();
@@ -102,32 +104,39 @@ void MainWindow::on_testButton_clicked()
 
 void MainWindow::on_resetButton_clicked()
 {
+    this->highlightLine(ui->codeText, -1, p.getLineNumber(p.getPC()));
     p.reset();
     MainWindow::updateRegisterTable();
+    ui->console->clear();
+
 }
 
 void MainWindow::on_stepButton_clicked()
 {
     string s = "false\n";
-    int previous_instruction = p.getPC();
-   if(p.executeSuccessfully(p.getPC())) s = "true\n";
+    int previous_instruction = p.getLineNumber(p.getPC());
+    if(p.executeSuccessfully(p.getPC())) s = "true\n";
+    this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     MainWindow::updateRegisterTable();
-    this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
+    ui->console->insertPlainText(QString::fromStdString(to_string(p.getPC())));
+    ui->console->insertPlainText(QString::fromStdString(" "));
+    ui->console->insertPlainText(QString::fromStdString(to_string(p.getLineNumber(p.getPC()))));
 }
-
 void MainWindow::on_assembleButton_clicked()
 {
     p.setSource((ui->codeText->toPlainText()).toStdString());
     string s = "false\n";
-   if(p.assembleSuccessfully()) s = "true\n";
+    if(p.assembleSuccessfully()) s = "true\n";
+    MainWindow::updateRegisterTable();
+    this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), 0);
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
 }
 
 void MainWindow::updateRegisterTable() {
     for(int i = 0; i<32; i++)
-        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
        //ui->tableWidget->item(i,0)->setText(((to_string(i)).c_str()));
 }
