@@ -40,7 +40,7 @@ public:
     void updateRegisterTable();
     static QString getInput();
     static void printOutput();
-    void highlightLine(QPlainTextEdit* text, int number);
+    void highlightLine(QPlainTextEdit* text, int number, int previous);
 private slots:
 
     void on_RunAll_clicked();

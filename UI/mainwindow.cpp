@@ -32,7 +32,7 @@ void MainWindow::printOutput() {
     buffer.str("");
 }
 
-void MainWindow::highlightLine(QPlainTextEdit* edit, int number) {
+void MainWindow::highlightLine(QPlainTextEdit* edit, int number, int previous) {
     //QTextDocument *doc = edit->document();
     ///QTextEdit::ExtraSelection selection = doc->findBlockByLineNumber(number);
 
@@ -47,6 +47,12 @@ void MainWindow::highlightLine(QPlainTextEdit* edit, int number) {
     QTextBlockFormat frmt = coursor.blockFormat();
     frmt.setBackground(QBrush(Qt::yellow));
     coursor.setBlockFormat(frmt);
+
+
+    QTextCursor pre_coursor(edit->document()->findBlockByLineNumber(previous));
+    QTextBlockFormat pre_frmt = pre_coursor.blockFormat();
+    pre_frmt.setBackground(QBrush(Qt::white));
+    pre_coursor.setBlockFormat(pre_frmt);
 }
 
 void MainWindow::on_RunAll_clicked()
@@ -103,11 +109,12 @@ void MainWindow::on_resetButton_clicked()
 void MainWindow::on_stepButton_clicked()
 {
     string s = "false\n";
+    int previous_instruction = p.getPC();
    if(p.executeSuccessfully(p.getPC())) s = "true\n";
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     MainWindow::updateRegisterTable();
-    this->highlightLine(ui->codeText, p.getPC());
+    this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
 }
 
 void MainWindow::on_assembleButton_clicked()
