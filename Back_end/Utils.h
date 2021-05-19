@@ -10,8 +10,8 @@ using std::string;
 using std::vector;
 
 
-// inline void LOG(string s) {};
-inline void LOG(string s) { std::cout << s; };
+inline void LOG(string s) {};
+// inline void LOG(string s) { std::cout << s; };
 
 class Parsing
 {
