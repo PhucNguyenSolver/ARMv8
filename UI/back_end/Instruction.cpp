@@ -402,32 +402,43 @@ void SyscallInstruction::execute()
     if (value == 1)
     {
         long print_value = hardware->GetRegister("X1");
-        cout << print_value;
+        MainWindow::buffer << print_value;
+        MainWindow::printOutput();
     }
-    else if (value == 2)
-        cout << "float print";
-    else if (value == 3)
-        cout << "double print";
+    else if (value == 2) {
+        MainWindow::buffer << "float print";
+        MainWindow::printOutput();
+    }
+    else if (value == 3) {
+        MainWindow::buffer << "double print";
+        MainWindow::printOutput();
+    }
     else if (value == 4)
     {
         int index = (int)hardware->GetRegister("X1");
-        string print_value = hardware->_mem->getString(index);
-        cout << "\nsyscall 8 print string: " << print_value << endl;
+        string print_value = "";
+        print_value = hardware->_mem->getString(index);
+        MainWindow::buffer << "\nsyscall 8 print string: " << print_value << endl;
+        MainWindow::printOutput();
     }
     else if (value == 5)
     {
         long read_value;
-        cin >> read_value;
+        read_value = (MainWindow::getInput()).toLong();
         hardware->SetRegister("X0", read_value);
     }
-    else if (value == 6)
+    else if (value == 6) {
         cout << "read float";
-    else if (value == 7)
+    }
+    else if (value == 7) {
         cout << "read double";
+    }
     else if (value == 8)
     {
         string read_value;
-        getline(cin, read_value);
+        read_value = (MainWindow::getInput()).toStdString();
+        MainWindow::buffer << read_value;
+        MainWindow::printOutput();
         hardware->SetRegister("X2", read_value.length());
         string raw = (string) ".asciz" + (string) " \"" + read_value + (string) "\" ";
         hardware->SetRegister("X1", hardware->_mem->getTop());
@@ -438,12 +449,13 @@ void SyscallInstruction::execute()
     else if (value == 11)
     {
         long print_value = hardware->GetRegister("X1");
-        cout << (char)print_value;
+        MainWindow::buffer << print_value;
+        MainWindow::printOutput();
     }
     else if (value == 12)
     {
         char read_value;
-        cin.get(read_value);
+        read_value = (MainWindow::getInput()).toStdString().c_str()[0];
         hardware->SetRegister("X0", (long)read_value);
     }
 }

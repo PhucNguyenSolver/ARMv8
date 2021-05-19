@@ -14,6 +14,8 @@
 #include "CodeEditor.h"
 #include <QLayout>
 #include <QString>
+#include <QObject>
+#include <QSyntaxHighlighter>
 #include "LineNumberArea.h"
 //<<<<<<< HEAD
 #include <QInputDialog>
@@ -35,9 +37,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     static stringstream buffer;
-    static QString getInput();
-    //static void getOutput();
     void updateRegisterTable();
+    static QString getInput();
+    static void printOutput();
+    void highlightLine(QPlainTextEdit* text, int number);
 private slots:
 
     void on_RunAll_clicked();
@@ -49,7 +52,7 @@ private slots:
     void on_assembleButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    static Ui::MainWindow *ui;
     Test t;
     Program p;
 };

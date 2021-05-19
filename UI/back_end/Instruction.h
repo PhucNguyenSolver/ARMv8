@@ -1,11 +1,12 @@
+#include "mainwindow.h" // add new library
+
 #ifndef INSTRUCTION
 #define INSTRUCTION
-
 #include <iostream>
 #include <string>
 #include "Hardware.h"
 using std::string;
-
+using namespace std;
 
 class Instruction
 {
