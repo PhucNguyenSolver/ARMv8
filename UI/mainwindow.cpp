@@ -1,12 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 //#include "back_end/program.cpp"
-
+Ui::MainWindow* MainWindow::ui = new Ui::MainWindow;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), t(), p()
+    , /*ui(new Ui::MainWindow),*/ t(), p()
 {
     ui->setupUi(this);
+    //QObject::connect(this, SIGNAL(getOutputSignal()), this, SLOT(printOutput()));
 }
 
 MainWindow::~MainWindow()
@@ -17,13 +18,36 @@ MainWindow::~MainWindow()
 QString MainWindow::getInput() {
     QString text = "";
     while (text == "")
-    text = QInputDialog::getText(new MainWindow(), tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
+    text = QInputDialog::getText(new QWidget(), tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
     return text;
 }
 
 stringstream MainWindow::buffer;
 
 
+void MainWindow::printOutput() {
+    string s = buffer.str();
+    QString qstr = QString::fromStdString(s);
+    ui->console->insertPlainText(qstr);
+    buffer.str("");
+}
+
+void MainWindow::highlightLine(QPlainTextEdit* edit, int number) {
+    //QTextDocument *doc = edit->document();
+    ///QTextEdit::ExtraSelection selection = doc->findBlockByLineNumber(number);
+
+//    QTextCharFormat fmt;
+//    fmt.setBackground(Qt::yellow);
+
+//    QTextCursor cursor(edit->document());
+//    cursor.setPosition(number, QTextCursor::MoveAnchor);
+//    cursor.setPosition(number+1, QTextCursor::KeepAnchor);
+//    cursor.setCharFormat(fmt);
+    QTextCursor coursor(edit->document()->findBlockByLineNumber(number));
+    QTextBlockFormat frmt = coursor.blockFormat();
+    frmt.setBackground(QBrush(Qt::yellow));
+    coursor.setBlockFormat(frmt);
+}
 
 void MainWindow::on_RunAll_clicked()
 {
@@ -61,7 +85,12 @@ void MainWindow::on_testButton_clicked()
 //    QString input = t.testGetInput();
 //    ui->console->insertPlainText(input);
 //    }
-    t.testOutput();
+    //t.testGetInput();
+   // ui->console->insertPlainText(t.testGetInput());
+//        QString text = "";
+//        while (text == "")
+//        text = QInputDialog::getText(this, tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
+//        ui->console->insertPlainText(text);
 }
 
 
@@ -78,6 +107,7 @@ void MainWindow::on_stepButton_clicked()
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     MainWindow::updateRegisterTable();
+    this->highlightLine(ui->codeText, p.getPC());
 }
 
 void MainWindow::on_assembleButton_clicked()

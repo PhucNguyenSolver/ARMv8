@@ -100,7 +100,7 @@ void Memory::loadVariable(string raw)
             //     top += 1;
             // }
             string a = raw.substr(raw.find_first_of("\""), raw.length());
-            for (int i = 1; i < a.length() - 2; i++)
+            for (int i = 1; a[i] != '\\' && i < (a.length()-2); i++)
             {
                 set(top, &a[i], 1);
                 top += 1;
