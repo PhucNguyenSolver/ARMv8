@@ -31,13 +31,14 @@ public:
         DATA
     };
 
-    PreProcess(string filename) { readFile(filename); }
+    PreProcess(string src) { readTextBox(src); }
     static map<string, int> label; // TODO: why static rather than instant's local
     vector<string> instructions; // TODO: make these variable external and singleton 
     vector<string> data;
 
 private:
     void readFile(string filename);
+    void readTextBox(string text);
 };
 
 // template <class T> // TODO: how to use template here - undefined reference
