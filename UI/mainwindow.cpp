@@ -24,6 +24,14 @@ QString MainWindow::getInput() {
     return text;
 }
 
+QString MainWindow::getInputWithMessage(string msg) {
+    QString text = "";
+    while (text == "")
+    text = QInputDialog::getText(new QWidget(), tr((msg.c_str())) ,tr(""), QLineEdit::Normal);
+    return text;
+//    return getInput();
+}
+
 stringstream MainWindow::buffer;
 
 
