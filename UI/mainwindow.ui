@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1288</width>
-    <height>650</height>
+    <width>1486</width>
+    <height>998</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,17 +19,11 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1261</width>
-      <height>611</height>
+      <width>1471</width>
+      <height>871</height>
      </rect>
     </property>
     <property name="minimumSize">
-     <size>
-      <width>1261</width>
-      <height>611</height>
-     </size>
-    </property>
-    <property name="maximumSize">
      <size>
       <width>1261</width>
       <height>611</height>
@@ -43,8 +37,8 @@
       <rect>
        <x>670</x>
        <y>10</y>
-       <width>561</width>
-       <height>571</height>
+       <width>791</width>
+       <height>841</height>
       </rect>
      </property>
      <property name="title">
@@ -56,7 +50,7 @@
         <x>30</x>
         <y>110</y>
         <width>141</width>
-        <height>451</height>
+        <height>461</height>
        </rect>
       </property>
       <property name="cursor" stdset="0">
@@ -123,7 +117,6 @@
       <row/>
       <column>
        <property name="text">
-        <string>Register name</string>
         <string>Name</string>
        </property>
        <property name="font">
@@ -295,25 +288,21 @@
       </item>
       <item row="28" column="0">
        <property name="text">
-        <string>X28</string>
         <string>SP</string>
        </property>
       </item>
       <item row="29" column="0">
        <property name="text">
-        <string>X29</string>
         <string>FP</string>
        </property>
       </item>
       <item row="30" column="0">
        <property name="text">
-        <string>X30</string>
         <string>LR</string>
        </property>
       </item>
       <item row="31" column="0">
        <property name="text">
-        <string>X31</string>
         <string>XZR</string>
        </property>
       </item>
@@ -323,8 +312,8 @@
        <rect>
         <x>170</x>
         <y>110</y>
-        <width>391</width>
-        <height>451</height>
+        <width>571</width>
+        <height>461</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -337,12 +326,6 @@
        <size>
         <width>351</width>
         <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>16777215</height>
        </size>
       </property>
       <property name="font">
@@ -366,22 +349,28 @@
        <number>15</number>
       </property>
       <property name="columnCount">
-       <number>8</number>
+       <number>16</number>
       </property>
       <attribute name="horizontalHeaderVisible">
        <bool>false</bool>
       </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>35</number>
+       <number>10</number>
       </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>45</number>
+       <number>35</number>
       </attribute>
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>15</number>
+      </attribute>
       <attribute name="verticalHeaderDefaultSectionSize">
-       <number>35</number>
+       <number>30</number>
+      </attribute>
+      <attribute name="verticalHeaderHighlightSections">
+       <bool>true</bool>
       </attribute>
       <row/>
       <row/>
@@ -411,6 +400,14 @@
         <set>AlignCenter</set>
        </property>
       </column>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
       <column/>
       <column/>
       <column/>
@@ -457,7 +454,7 @@
        <x>30</x>
        <y>30</y>
        <width>641</width>
-       <height>551</height>
+       <height>821</height>
       </rect>
      </property>
      <property name="title">
@@ -547,7 +544,7 @@
         <x>10</x>
         <y>90</y>
         <width>621</width>
-        <height>331</height>
+        <height>501</height>
        </rect>
       </property>
      </widget>
@@ -555,9 +552,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>440</y>
+        <y>620</y>
         <width>621</width>
-        <height>101</height>
+        <height>191</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -577,8 +574,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1288</width>
-     <height>20</height>
+     <width>1486</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
