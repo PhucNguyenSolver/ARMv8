@@ -38,6 +38,7 @@ public:
     ~MainWindow();
     static stringstream buffer;
     void updateRegisterTable();
+    void updateLabelTable(); // new
     void updateMemoryTable();
     static QString getInput();
     static void printOutput();
@@ -51,6 +52,8 @@ private slots:
     void on_stepButton_clicked();
 
     void on_assembleButton_clicked();
+
+    void on_tableLabel_activated(const QModelIndex &index);
 
 private:
     static Ui::MainWindow *ui;

@@ -35,8 +35,8 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>670</x>
-       <y>10</y>
+       <x>660</x>
+       <y>20</y>
        <width>791</width>
        <height>841</height>
       </rect>
@@ -76,6 +76,12 @@
       </property>
       <attribute name="horizontalHeaderVisible">
        <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>10</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>35</number>
       </attribute>
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
@@ -447,6 +453,19 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Memory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>580</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Label&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_4">
      <property name="geometry">
@@ -561,9 +580,36 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QTableWidget" name="labelTable">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>370</y>
+        <width>201</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>0</number>
+      </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Address</string>
+       </property>
+      </column>
+     </widget>
      <zorder>groupBox_2</zorder>
      <zorder>console</zorder>
      <zorder>codeText</zorder>
+     <zorder>labelTable</zorder>
     </widget>
     <zorder>groupBox_4</zorder>
     <zorder>groupBox_3</zorder>
@@ -575,7 +621,7 @@
      <x>0</x>
      <y>0</y>
      <width>1486</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

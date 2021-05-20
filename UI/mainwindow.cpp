@@ -71,7 +71,8 @@ void MainWindow::on_RunAll_clicked()
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     p.runAll();
-    //MainWindow::updateRegisterTable();
+    MainWindow::updateRegisterTable();
+    MainWindow::updateMemoryTable();
 }
 
 
@@ -109,14 +110,14 @@ void MainWindow::on_resetButton_clicked()
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
     ui->console->clear();
-
+    ui->labelTable->clearContents();
+    ui->labelTable->setRowCount(0);
 }
 
 void MainWindow::on_stepButton_clicked()
 {
     string s = "false\n";
     int previous_instruction = p.getLineNumber(p.getPC());
-    //this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), 1);
     if(p.executeSuccessfully(p.getPC())) s = "true\n";
     this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
     QString qstr = QString::fromStdString(s);
@@ -139,6 +140,7 @@ void MainWindow::on_assembleButton_clicked()
     ui->console->insertPlainText(qstr);
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
+    MainWindow::updateLabelTable();
 }
 
 void MainWindow::updateRegisterTable() {
@@ -148,9 +150,20 @@ void MainWindow::updateRegisterTable() {
 }
 
 void MainWindow::updateMemoryTable() {
-    int rowNum = 15;
-    int colNum = 8;
+    int rowNum = ui->tableWidget_2->rowCount();
+    int colNum = ui->tableWidget_2->columnCount();
     int memNum = rowNum*colNum;
     for (int i = 0; i<memNum; i++)
-        ui->tableWidget_2->setItem(i/colNum, i%colNum, new QTableWidgetItem(tr((to_string(i)).c_str())));
+        ui->tableWidget_2->setItem(i/colNum, i%colNum, new QTableWidgetItem(tr((to_string(p.getMemoryValue(i))).c_str())));
+}
+
+void MainWindow::updateLabelTable() {
+   map<string, int> mapLabel = p.getLabel();
+   int rowNum = mapLabel.size();
+   ui->labelTable->setRowCount(rowNum);
+   int i = 0;
+   for (std::map<string,int>::reverse_iterator rit=mapLabel.rbegin(); rit!=mapLabel.rend(); ++rit, ++i) {
+       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
+       ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
+   }
 }
