@@ -1,12 +1,17 @@
-#include <vector>
-#include <iostream>
 #include <algorithm>
+#include <vector>
+#include <bitset>
+#include <chrono>
+#include <climits>
+#include <iostream>
+#include <sstream>
+#include <thread>
 
 #include "Utils.h"
 #include "Instruction.h"
-using std::cin;
-using std::cout;
-using std::endl;
+
+
+inline long sys_rand() { return ((long)rand() << 32) | rand(); }
 
 Instruction::Instruction(string s)
 {
@@ -24,7 +29,7 @@ Instruction::IType Instruction::instructionType(string s) // TODO: add defined i
 {
     vector<string> insWord = Parsing::parseTokens(s);
     vector<string> CBSet{"CBZ", "CBNZ", "B.NE", "B.EQ", "B.LT", "B.LE", "B.GT", "B.GE", "B.HS"};
-    vector<string> RSet{"ADD","AND","SUB","EOR","LSL","LSR","ORR","AND","BR","FADDS","FCMPS","FDIVS","FMULS","FSUBS"};
+    vector<string> RSet{"ADD", "AND", "SUB", "EOR", "LSL", "LSR", "ORR", "AND", "BR", "FADDS", "FCMPS", "FDIVS", "FMULS", "FSUBS"};
     vector<string> ISet{"ADDI", "ANDI", "SUBI", "ADDIS", "ANDIS", "SUBIS", "EORI", "ORRI"};
     vector<string> DSet{"LDUR", "LDURB", "LDURH", "LDURSW", "LDXR", "STUR", "STURB", "LDURH", "LDURSW", "LDXR"};
     // 10 types
@@ -328,21 +333,21 @@ void DInstruction::execute()
 
 /*-----------------------------*/
 
-RInstruction    ::RInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
-IInstruction    ::IInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
-DInstruction    ::DInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
-BInstruction    ::BInstruction  (Hardware *hardware, string s): Instruction(hardware, s) {}
-CBInstruction   ::CBInstruction (Hardware *hardware, string s): Instruction(hardware, s) {}
-PIInstruction   ::PIInstruction (Hardware *hardware, string s): DInstruction(hardware, s) {}
-SyscallInstruction::SyscallInstruction(Hardware *hardware, string s): Instruction(hardware, s) {}
+RInstruction ::RInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
+IInstruction ::IInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
+DInstruction ::DInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
+BInstruction ::BInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
+CBInstruction ::CBInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
+PIInstruction ::PIInstruction(Hardware *hardware, string s) : DInstruction(hardware, s) {}
+SyscallInstruction::SyscallInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
 
-RInstruction    ::RInstruction  (string s): Instruction(s) {}
-IInstruction    ::IInstruction  (string s): Instruction(s) {}
-DInstruction    ::DInstruction  (string s): Instruction(s) {}
-BInstruction    ::BInstruction  (string s): Instruction(s) {}
-CBInstruction   ::CBInstruction (string s): Instruction(s) {}
-PIInstruction   ::PIInstruction (string s): DInstruction(s) {}
-SyscallInstruction::SyscallInstruction(string s): Instruction(s) {}
+RInstruction ::RInstruction(string s) : Instruction(s) {}
+IInstruction ::IInstruction(string s) : Instruction(s) {}
+DInstruction ::DInstruction(string s) : Instruction(s) {}
+BInstruction ::BInstruction(string s) : Instruction(s) {}
+CBInstruction ::CBInstruction(string s) : Instruction(s) {}
+PIInstruction ::PIInstruction(string s) : DInstruction(s) {}
+SyscallInstruction::SyscallInstruction(string s) : Instruction(s) {}
 
 void PIInstruction::setFlags(long res, long a, long b)
 {
@@ -398,64 +403,174 @@ void PIInstruction::execute()
 
 void SyscallInstruction::execute()
 {
+    using namespace std;
     long value = hardware->GetRegister("X0");
-    if (value == 1)
+
+    switch (value)
+    {
+    case 1: // print integer
     {
         long print_value = hardware->GetRegister("X1");
         MainWindow::buffer << print_value;
         MainWindow::printOutput();
+        break;
     }
-    else if (value == 2) {
+    case 2: // print float
+    {
         MainWindow::buffer << "float print";
         MainWindow::printOutput();
+        break;
     }
-    else if (value == 3) {
+    case 3: // print double
+    {
         MainWindow::buffer << "double print";
         MainWindow::printOutput();
+        break;
     }
-    else if (value == 4)
+    case 4: // print string
     {
         int index = (int)hardware->GetRegister("X1");
         string print_value = "";
         print_value = hardware->_mem->getString(index);
-        MainWindow::buffer << "\nsyscall 8 print string: " << print_value << endl;
+        MainWindow::buffer << print_value << endl;
         MainWindow::printOutput();
+        break;
     }
-    else if (value == 5)
+    case 5: // read integer
     {
         long read_value;
-        read_value = (MainWindow::getInput()).toLong();
+        string msg = "Enter an integer value (syscall 5)";
+        read_value = (MainWindow::getInputWithMessage(msg)).toLong();
+        // read_value = (MainWindow::getInput()).toLong();
         hardware->SetRegister("X0", read_value);
+        break;
     }
-    else if (value == 6) {
+    case 6: // read float
+    {
         cout << "read float";
+        break;
     }
-    else if (value == 7) {
+    case 7: // read double
+    {
         cout << "read double";
+        break;
     }
-    else if (value == 8)
+    case 8: // read string
     {
         string read_value;
-        read_value = (MainWindow::getInput()).toStdString();
+        string msg = "Enter a string of maximum length oo (syscall 8)";
+        read_value = (MainWindow::getInputWithMessage(msg)).toStdString();
+        // read_value = (MainWindow::getInput()).toStdString();
         MainWindow::buffer << read_value;
         MainWindow::printOutput();
         hardware->SetRegister("X2", read_value.length());
         string raw = (string) ".asciz" + (string) " \"" + read_value + (string) "\" ";
         hardware->SetRegister("X1", hardware->_mem->getTop());
         hardware->_mem->loadVariable(raw);
+        break;
     }
-    else if (value == 10)
+    case 10: // terminate execution
+    {
+        break;
         exit(0);
-    else if (value == 11)
+    }
+    case 11: // print character
     {
         long print_value = hardware->GetRegister("X1");
         MainWindow::buffer << print_value;
         MainWindow::printOutput();
+        break;
     }
-    else if (value == 12)
+    case 12: // read character
     {
         char read_value;
-        read_value = (MainWindow::getInput()).toStdString().c_str()[0];
+        string msg = "Enter a character value (syscall 12)";
+        read_value = (MainWindow::getInputWithMessage(msg)).toStdString().c_str()[0];
+        // read_value = (MainWindow::getInput()).toStdString().c_str()[0];
         hardware->SetRegister("X0", (long)read_value);
+        break;
+    }
+    case 30: // system time
+    {
+        chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
+            chrono::system_clock::now().time_since_epoch());
+        unsigned long msCount = ms.count();
+
+        long msb = msCount >> 32;
+        long lsb = msCount << 32 >> 32;
+        // cout << msb << " | "<< lsb  << endl;
+        hardware->SetRegister("X0", lsb);
+        hardware->SetRegister("X1", msb);
+        break;
+    }
+    case 32: // sleep
+    {
+        long miliseconds = hardware->GetRegister("X0");
+        std::this_thread::sleep_for(chrono::milliseconds(miliseconds));
+        break;
+    }
+    case 34: // print int2hex
+    {
+        long n = hardware->GetRegister("X0");
+        char cstr[128];
+        sprintf(cstr, "%#010x", n);
+        string out = cstr;
+        MainWindow::buffer << print_value;
+        MainWindow::printOutput();
+        // cout << out;
+        break;
+    }
+    case 35: // print int2bin
+    {
+        long n = hardware->GetRegister("X0");
+        bitset<32> a(n);
+        string out = a.to_string();
+        MainWindow::buffer << print_value;
+        MainWindow::printOutput();
+        // cout << out;
+        break;
+    }
+    case 36: // print int2unsigned
+    {
+        long n = hardware->GetRegister("X0");
+        unsigned long *cast = (unsigned long *)(&n);
+        string out = to_string((unsigned long)(*cast));
+        MainWindow::buffer << print_value;
+        MainWindow::printOutput();
+        // cout << out;
+        break;
+    }
+    case 40: // set seed
+    {
+        long seed = hardware->GetRegister("X0");
+        srand(seed);
+        break;
+    }
+    case 41: // random int
+    {
+        long out = sys_rand();
+        hardware->SetRegister("X0", out);
+        break;
+    }
+    case 42: // random int range
+    {
+        unsigned long upperBound = hardware->GetRegister("X1");
+        long out = sys_rand() % upperBound;
+        hardware->SetRegister("X0", out);
+        break;
+    }
+    case 43: // random float
+    {
+        float out = (float)rand() / RAND_MAX;
+        hardware->setFloatRegister("F0", out); // TODO: check this
+        break;
+    }
+    case 44: // random double
+    {
+        float out = (double)sys_rand() / (double)LLONG_MAX;
+        hardware->setFloatRegister("F0", out); // TODO: check this
+    }
+    default:
+        throw "Unknown syscall.";
     }
 }
