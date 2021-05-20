@@ -29,7 +29,6 @@ QString MainWindow::getInputWithMessage(string msg) {
     while (text == "")
     text = QInputDialog::getText(new QWidget(), tr((msg.c_str())) ,tr(""), QLineEdit::Normal);
     return text;
-//    return getInput();
 }
 
 stringstream MainWindow::buffer;

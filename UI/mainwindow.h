@@ -41,6 +41,7 @@ public:
     void updateLabelTable(); // new
     void updateMemoryTable();
     static QString getInput();
+    static QString getInputWithMessage(string msg);
     static void printOutput();
     void highlightLine(QPlainTextEdit* text, int number, int previous);
 private slots:
