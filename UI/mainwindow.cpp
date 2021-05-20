@@ -162,8 +162,8 @@ void MainWindow::updateLabelTable() {
    int rowNum = mapLabel.size();
    ui->labelTable->setRowCount(rowNum);
    int i = 0;
-   for (std::map<string,int>::iterator it=mapLabel.begin(); it!=mapLabel.end(); ++it, ++i) {
-       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((it->first).c_str())));
-       ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(it->second)).c_str())));
+   for (std::map<string,int>::reverse_iterator rit=mapLabel.rbegin(); rit!=mapLabel.rend(); ++rit, ++i) {
+       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
+       ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
    }
 }
