@@ -120,9 +120,174 @@
       <row/>
       <column>
        <property name="text">
+        <string>Register name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Values</string>
        </property>
       </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>X0</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>X1</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>X2</string>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string>X3</string>
+       </property>
+      </item>
+      <item row="4" column="0">
+       <property name="text">
+        <string>X4</string>
+       </property>
+      </item>
+      <item row="5" column="0">
+       <property name="text">
+        <string>X5</string>
+       </property>
+      </item>
+      <item row="6" column="0">
+       <property name="text">
+        <string>X6</string>
+       </property>
+      </item>
+      <item row="7" column="0">
+       <property name="text">
+        <string>X7</string>
+       </property>
+      </item>
+      <item row="8" column="0">
+       <property name="text">
+        <string>X8</string>
+       </property>
+      </item>
+      <item row="9" column="0">
+       <property name="text">
+        <string>X9</string>
+       </property>
+      </item>
+      <item row="10" column="0">
+       <property name="text">
+        <string>X10</string>
+       </property>
+      </item>
+      <item row="11" column="0">
+       <property name="text">
+        <string>X11</string>
+       </property>
+      </item>
+      <item row="12" column="0">
+       <property name="text">
+        <string>X12</string>
+       </property>
+      </item>
+      <item row="13" column="0">
+       <property name="text">
+        <string>X13</string>
+       </property>
+      </item>
+      <item row="14" column="0">
+       <property name="text">
+        <string>X14</string>
+       </property>
+      </item>
+      <item row="15" column="0">
+       <property name="text">
+        <string>X15</string>
+       </property>
+      </item>
+      <item row="16" column="0">
+       <property name="text">
+        <string>X16</string>
+       </property>
+      </item>
+      <item row="17" column="0">
+       <property name="text">
+        <string>X17</string>
+       </property>
+      </item>
+      <item row="18" column="0">
+       <property name="text">
+        <string>X18</string>
+       </property>
+      </item>
+      <item row="19" column="0">
+       <property name="text">
+        <string>X19</string>
+       </property>
+      </item>
+      <item row="20" column="0">
+       <property name="text">
+        <string>X20</string>
+       </property>
+      </item>
+      <item row="21" column="0">
+       <property name="text">
+        <string>X21</string>
+       </property>
+      </item>
+      <item row="22" column="0">
+       <property name="text">
+        <string>X22</string>
+       </property>
+      </item>
+      <item row="23" column="0">
+       <property name="text">
+        <string>X23</string>
+       </property>
+      </item>
+      <item row="24" column="0">
+       <property name="text">
+        <string>X24</string>
+       </property>
+      </item>
+      <item row="25" column="0">
+       <property name="text">
+        <string>X25</string>
+       </property>
+      </item>
+      <item row="26" column="0">
+       <property name="text">
+        <string>X26</string>
+       </property>
+      </item>
+      <item row="27" column="0">
+       <property name="text">
+        <string>X27</string>
+       </property>
+      </item>
+      <item row="28" column="0">
+       <property name="text">
+        <string>X28</string>
+       </property>
+      </item>
+      <item row="29" column="0">
+       <property name="text">
+        <string>X29</string>
+       </property>
+      </item>
+      <item row="30" column="0">
+       <property name="text">
+        <string>X30</string>
+       </property>
+      </item>
+      <item row="31" column="0">
+       <property name="text">
+        <string>X31</string>
+       </property>
+      </item>
      </widget>
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">

@@ -104,6 +104,7 @@ void MainWindow::on_resetButton_clicked()
 {
     p.reset();
     MainWindow::updateRegisterTable();
+    MainWindow::updateMemoryTable();
 }
 
 void MainWindow::on_stepButton_clicked()
@@ -114,6 +115,7 @@ void MainWindow::on_stepButton_clicked()
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     MainWindow::updateRegisterTable();
+    MainWindow::updateMemoryTable();
     this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
 }
 
@@ -124,10 +126,20 @@ void MainWindow::on_assembleButton_clicked()
    if(p.assembleSuccessfully()) s = "true\n";
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
+    MainWindow::updateRegisterTable();
+    MainWindow::updateMemoryTable();
 }
 
 void MainWindow::updateRegisterTable() {
     for(int i = 0; i<32; i++)
-        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
        //ui->tableWidget->item(i,0)->setText(((to_string(i)).c_str()));
+}
+
+void MainWindow::updateMemoryTable() {
+    int rowNum = 15;
+    int colNum = 8;
+    int memNum = rowNum*colNum;
+    for (int i = 0; i<memNum; i++)
+        ui->tableWidget_2->setItem(i/colNum, i%colNum, new QTableWidgetItem(tr((to_string(i)).c_str())));
 }
