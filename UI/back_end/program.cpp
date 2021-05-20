@@ -149,4 +149,6 @@ int Program::getLineNumber(int index) {
 
 map<string, int> Program::getLabel() {
     return PreProcess::label;
+int Program::getMemoryValue(int index) {
+    return int(*((char*)(hardware->_mem->get(index))));
 }

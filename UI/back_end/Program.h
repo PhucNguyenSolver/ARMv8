@@ -22,6 +22,7 @@ public:
 
     int getPC();
     long getRegisterValue(int index);
+    int getMemoryValue(int index); 
     int getLineNumber(int index);
     map<string, int> getLabel();
 private:
