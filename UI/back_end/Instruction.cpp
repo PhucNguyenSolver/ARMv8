@@ -515,7 +515,7 @@ void SyscallInstruction::execute()
         char cstr[128];
         sprintf(cstr, "%#010x", n);
         string out = cstr;
-        MainWindow::buffer << print_value;
+        MainWindow::buffer << out;
         MainWindow::printOutput();
         // cout << out;
         break;
@@ -525,7 +525,7 @@ void SyscallInstruction::execute()
         long n = hardware->GetRegister("X0");
         bitset<32> a(n);
         string out = a.to_string();
-        MainWindow::buffer << print_value;
+        MainWindow::buffer << out;
         MainWindow::printOutput();
         // cout << out;
         break;
@@ -535,7 +535,7 @@ void SyscallInstruction::execute()
         long n = hardware->GetRegister("X0");
         unsigned long *cast = (unsigned long *)(&n);
         string out = to_string((unsigned long)(*cast));
-        MainWindow::buffer << print_value;
+        MainWindow::buffer << out;
         MainWindow::printOutput();
         // cout << out;
         break;
