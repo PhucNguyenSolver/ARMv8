@@ -10,8 +10,8 @@ using std::string;
 using std::vector;
 
 
-// inline void LOG(string s) {};
-inline void LOG(string s) { std::cout << s; };
+inline void LOG(string s) {};
+// inline void LOG(string s) { std::cout << s; };
 
 class Parsing
 {
@@ -43,5 +43,7 @@ private:
 
 // template <class T> // TODO: how to use template here - undefined reference
 void logVector(vector<string> vect);
+
+long sys_rand(); // rand_64
 
 #endif // !UTILS_H

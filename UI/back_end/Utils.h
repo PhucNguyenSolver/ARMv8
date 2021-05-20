@@ -33,7 +33,8 @@ public:
 
     PreProcess(string src) { readTextBox(src); }
     static map<string, int> label; // TODO: why static rather than instant's local
-    vector<string> instructions; // TODO: make these variable external and singleton 
+    vector<string> instructions; // TODO: make these variable external and singleton
+    vector<int> lineNumber;
     vector<string> data;
 
 private:

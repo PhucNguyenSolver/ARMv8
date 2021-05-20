@@ -22,11 +22,15 @@ public:
 
     int getPC();
     long getRegisterValue(int index);
+    int getLineNumber(int index);
 private:
     std::string _source;
     Hardware *hardware;
     std::vector<Instruction *> instructions;
+    std::vector<int> lineNumber;
+
     void pushInstruction(std::string raw);
+    void pushLineNumber(int i);
     void pushData(std::string raw);
     void log();
 };

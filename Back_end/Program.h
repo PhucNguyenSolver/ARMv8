@@ -20,14 +20,13 @@ public:
 
     int getPC();
     long getRegisterValue(int index);
+    void log();
 
 private:
     std::string _source;
     Hardware *hardware;
     std::vector<Instruction *> instructions;
     void pushInstruction(std::string raw);
-    void pushData(std::string raw);
-    void log();
 };
 
 #endif // !PROGRAM_H

@@ -27,7 +27,7 @@ bool Program::assembleSuccessfully()
     {
         try
         {
-            this->pushData(var);
+            this->hardware->pushData(var);
         }
         catch (...)
         {
@@ -118,11 +118,6 @@ void Program::pushInstruction(string raw)
         instructions.push_back(new SyscallInstruction(hardware, raw));
     else
         throw "Invalid instruction";
-}
-
-void Program::pushData(string raw)
-{
-    hardware->pushData(raw);
 }
 
 void Program::log()

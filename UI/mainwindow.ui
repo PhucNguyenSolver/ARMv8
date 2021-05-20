@@ -41,7 +41,7 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>680</x>
+       <x>670</x>
        <y>10</y>
        <width>561</width>
        <height>571</height>
@@ -53,9 +53,9 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>30</x>
         <y>110</y>
-        <width>151</width>
+        <width>141</width>
         <height>451</height>
        </rect>
       </property>
@@ -86,6 +86,9 @@
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>30</number>
+      </attribute>
       <row/>
       <row/>
       <row/>
@@ -120,7 +123,16 @@
       <row/>
       <column>
        <property name="text">
+<<<<<<< HEAD
         <string>Register name</string>
+=======
+        <string>Name</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+>>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
        </property>
       </column>
       <column>
@@ -132,6 +144,20 @@
        <property name="text">
         <string>X0</string>
        </property>
+<<<<<<< HEAD
+=======
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>true</kerning>
+        </font>
+       </property>
+>>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
       </item>
       <item row="1" column="0">
        <property name="text">
@@ -143,6 +169,14 @@
         <string>X2</string>
        </property>
       </item>
+<<<<<<< HEAD
+=======
+      <item row="2" column="1">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+>>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
       <item row="3" column="0">
        <property name="text">
         <string>X3</string>
@@ -270,22 +304,32 @@
       </item>
       <item row="28" column="0">
        <property name="text">
+<<<<<<< HEAD
         <string>X28</string>
+=======
+        <string>SP</string>
+>>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
        </property>
       </item>
       <item row="29" column="0">
        <property name="text">
+<<<<<<< HEAD
         <string>X29</string>
+=======
+        <string>FP</string>
+>>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
        </property>
       </item>
       <item row="30" column="0">
        <property name="text">
         <string>X30</string>
+        <string>LR</string>
        </property>
       </item>
       <item row="31" column="0">
        <property name="text">
         <string>X31</string>
+        <string>XZR</string>
        </property>
       </item>
      </widget>
@@ -535,7 +579,12 @@
        <bool>true</bool>
       </property>
      </widget>
+     <zorder>groupBox_2</zorder>
+     <zorder>console</zorder>
+     <zorder>codeText</zorder>
     </widget>
+    <zorder>groupBox_4</zorder>
+    <zorder>groupBox_3</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -544,7 +593,7 @@
      <x>0</x>
      <y>0</y>
      <width>1288</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
