@@ -156,7 +156,8 @@ public:
         tableWidget->setCornerButtonEnabled(true);
         tableWidget->setRowCount(32);
         tableWidget->horizontalHeader()->setVisible(false);
-        tableWidget->horizontalHeader()->setStretchLastSection(false);
+        tableWidget->horizontalHeader()->setMinimumSectionSize(10);
+        tableWidget->horizontalHeader()->setDefaultSectionSize(35);
         tableWidget->verticalHeader()->setVisible(false);
         tableWidget->verticalHeader()->setDefaultSectionSize(30);
         tableWidget_2 = new QTableWidget(groupBox_3);
