@@ -20,6 +20,7 @@ public:
 
     int getPC();
     long getRegisterValue(int index);
+    int getMemoryValue(int index); 
     void log();
 
 private:
