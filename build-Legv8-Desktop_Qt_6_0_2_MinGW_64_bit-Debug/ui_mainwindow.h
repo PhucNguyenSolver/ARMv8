@@ -35,6 +35,7 @@ public:
     QTableWidget *tableWidget_2;
     QLabel *label;
     QLabel *label_2;
+    QLabel *label_3;
     QGroupBox *groupBox_4;
     QGroupBox *groupBox_2;
     QPushButton *RunAll;
@@ -44,6 +45,7 @@ public:
     QPushButton *resetButton;
     CodeEditor *codeText;
     QTextEdit *console;
+    QTableWidget *labelTable;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -51,17 +53,16 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1288, 650);
+        MainWindow->resize(1486, 998);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(0, 0, 1261, 611));
+        groupBox->setGeometry(QRect(0, 0, 1471, 871));
         groupBox->setMinimumSize(QSize(1261, 611));
-        groupBox->setMaximumSize(QSize(1261, 611));
         groupBox_3 = new QGroupBox(groupBox);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(670, 10, 561, 571));
+        groupBox_3->setGeometry(QRect(660, 20, 791, 841));
         tableWidget = new QTableWidget(groupBox_3);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
@@ -146,7 +147,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem34 = new QTableWidgetItem();
         tableWidget->setItem(31, 0, __qtablewidgetitem34);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(30, 110, 141, 451));
+        tableWidget->setGeometry(QRect(30, 110, 141, 461));
         tableWidget->viewport()->setProperty("cursor", QVariant(QCursor(Qt::ArrowCursor)));
         tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget->setShowGrid(true);
@@ -155,11 +156,12 @@ public:
         tableWidget->setCornerButtonEnabled(true);
         tableWidget->setRowCount(32);
         tableWidget->horizontalHeader()->setVisible(false);
+        tableWidget->horizontalHeader()->setStretchLastSection(false);
         tableWidget->verticalHeader()->setVisible(false);
         tableWidget->verticalHeader()->setDefaultSectionSize(30);
         tableWidget_2 = new QTableWidget(groupBox_3);
-        if (tableWidget_2->columnCount() < 8)
-            tableWidget_2->setColumnCount(8);
+        if (tableWidget_2->columnCount() < 16)
+            tableWidget_2->setColumnCount(16);
         QFont font2;
         font2.setPointSize(14);
         QTableWidgetItem *__qtablewidgetitem35 = new QTableWidgetItem();
@@ -171,14 +173,13 @@ public:
         QTableWidgetItem *__qtablewidgetitem36 = new QTableWidgetItem();
         tableWidget_2->setItem(0, 0, __qtablewidgetitem36);
         tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
-        tableWidget_2->setGeometry(QRect(170, 110, 391, 451));
+        tableWidget_2->setGeometry(QRect(170, 110, 571, 461));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableWidget_2->sizePolicy().hasHeightForWidth());
         tableWidget_2->setSizePolicy(sizePolicy);
         tableWidget_2->setMinimumSize(QSize(351, 0));
-        tableWidget_2->setMaximumSize(QSize(400, 16777215));
         QFont font3;
         font3.setPointSize(9);
         tableWidget_2->setFont(font3);
@@ -187,21 +188,26 @@ public:
         tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget_2->setShowGrid(true);
         tableWidget_2->setRowCount(15);
-        tableWidget_2->setColumnCount(8);
+        tableWidget_2->setColumnCount(16);
         tableWidget_2->horizontalHeader()->setVisible(false);
-        tableWidget_2->horizontalHeader()->setMinimumSectionSize(35);
-        tableWidget_2->horizontalHeader()->setDefaultSectionSize(45);
+        tableWidget_2->horizontalHeader()->setMinimumSectionSize(10);
+        tableWidget_2->horizontalHeader()->setDefaultSectionSize(35);
         tableWidget_2->verticalHeader()->setVisible(false);
-        tableWidget_2->verticalHeader()->setDefaultSectionSize(35);
+        tableWidget_2->verticalHeader()->setMinimumSectionSize(15);
+        tableWidget_2->verticalHeader()->setDefaultSectionSize(30);
+        tableWidget_2->verticalHeader()->setHighlightSections(true);
         label = new QLabel(groupBox_3);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(20, 50, 161, 51));
         label_2 = new QLabel(groupBox_3);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(210, 50, 331, 51));
+        label_3 = new QLabel(groupBox_3);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(50, 580, 161, 41));
         groupBox_4 = new QGroupBox(groupBox);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        groupBox_4->setGeometry(QRect(30, 30, 641, 551));
+        groupBox_4->setGeometry(QRect(30, 30, 641, 821));
         groupBox_2 = new QGroupBox(groupBox_4);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setGeometry(QRect(10, 10, 621, 71));
@@ -222,20 +228,32 @@ public:
         resetButton->setGeometry(QRect(310, 20, 81, 41));
         codeText = new CodeEditor(groupBox_4);
         codeText->setObjectName(QString::fromUtf8("codeText"));
-        codeText->setGeometry(QRect(10, 90, 621, 331));
+        codeText->setGeometry(QRect(10, 90, 621, 501));
         console = new QTextEdit(groupBox_4);
         console->setObjectName(QString::fromUtf8("console"));
-        console->setGeometry(QRect(10, 440, 621, 101));
+        console->setGeometry(QRect(10, 620, 621, 191));
         console->setReadOnly(true);
+        labelTable = new QTableWidget(groupBox_4);
+        if (labelTable->columnCount() < 2)
+            labelTable->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem37 = new QTableWidgetItem();
+        labelTable->setHorizontalHeaderItem(0, __qtablewidgetitem37);
+        QTableWidgetItem *__qtablewidgetitem38 = new QTableWidgetItem();
+        labelTable->setHorizontalHeaderItem(1, __qtablewidgetitem38);
+        labelTable->setObjectName(QString::fromUtf8("labelTable"));
+        labelTable->setGeometry(QRect(410, 370, 201, 211));
+        labelTable->setRowCount(0);
+        labelTable->verticalHeader()->setVisible(false);
         groupBox_2->raise();
         console->raise();
         codeText->raise();
+        labelTable->raise();
         groupBox_4->raise();
         groupBox_3->raise();
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1288, 20));
+        menubar->setGeometry(QRect(0, 0, 1486, 20));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -331,6 +349,7 @@ public:
 
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Register</span></p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Memory</span></p></body></html>", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Label</span></p></body></html>", nullptr));
         groupBox_4->setTitle(QString());
         groupBox_2->setTitle(QString());
         RunAll->setText(QCoreApplication::translate("MainWindow", "RunAll", nullptr));
@@ -338,6 +357,10 @@ public:
         assembleButton->setText(QCoreApplication::translate("MainWindow", "Assemble", nullptr));
         stepButton->setText(QCoreApplication::translate("MainWindow", "Step", nullptr));
         resetButton->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
+        QTableWidgetItem *___qtablewidgetitem34 = labelTable->horizontalHeaderItem(0);
+        ___qtablewidgetitem34->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
+        QTableWidgetItem *___qtablewidgetitem35 = labelTable->horizontalHeaderItem(1);
+        ___qtablewidgetitem35->setText(QCoreApplication::translate("MainWindow", "Address", nullptr));
     } // retranslateUi
 
 };

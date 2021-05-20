@@ -63,6 +63,7 @@ bool Program::assembleSuccessfully()
             return false;
         }
     }
+    // Load label
     return true;
 }
 
@@ -144,4 +145,8 @@ long Program::getRegisterValue(int index) {
 
 int Program::getLineNumber(int index) {
     return lineNumber[index];
+}
+
+map<string, int> Program::getLabel() {
+    return PreProcess::label;
 }
