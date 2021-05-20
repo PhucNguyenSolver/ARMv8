@@ -71,7 +71,8 @@ void MainWindow::on_RunAll_clicked()
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     p.runAll();
-    //MainWindow::updateRegisterTable();
+    MainWindow::updateRegisterTable();
+    MainWindow::updateMemoryTable();
 }
 
 
@@ -116,7 +117,6 @@ void MainWindow::on_stepButton_clicked()
 {
     string s = "false\n";
     int previous_instruction = p.getLineNumber(p.getPC());
-    //this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), 1);
     if(p.executeSuccessfully(p.getPC())) s = "true\n";
     this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
     QString qstr = QString::fromStdString(s);
@@ -148,9 +148,9 @@ void MainWindow::updateRegisterTable() {
 }
 
 void MainWindow::updateMemoryTable() {
-    int rowNum = 15;
-    int colNum = 8;
+    int rowNum = ui->tableWidget_2->rowCount();
+    int colNum = ui->tableWidget_2->columnCount();
     int memNum = rowNum*colNum;
     for (int i = 0; i<memNum; i++)
-        ui->tableWidget_2->setItem(i/colNum, i%colNum, new QTableWidgetItem(tr((to_string(i)).c_str())));
+        ui->tableWidget_2->setItem(i/colNum, i%colNum, new QTableWidgetItem(tr((to_string(p.getMemoryValue(i))).c_str())));
 }

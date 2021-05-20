@@ -136,6 +136,10 @@ int Memory::getTop()
 {
     return this->top;
 }
+
+void* Memory::get(int index) {
+    return (void*)(mem + index);
+}
 /*
 int main()
 {

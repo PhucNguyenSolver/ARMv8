@@ -145,3 +145,7 @@ long Program::getRegisterValue(int index) {
 int Program::getLineNumber(int index) {
     return lineNumber[index];
 }
+
+int Program::getMemoryValue(int index) {
+    return int(*((char*)(hardware->_mem->get(index))));
+}

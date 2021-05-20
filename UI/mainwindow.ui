@@ -77,6 +77,12 @@
       <attribute name="horizontalHeaderVisible">
        <bool>false</bool>
       </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>10</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>35</number>
+      </attribute>
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
