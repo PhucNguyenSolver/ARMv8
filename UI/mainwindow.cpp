@@ -116,13 +116,14 @@ void MainWindow::on_stepButton_clicked()
 {
     string s = "false\n";
     int previous_instruction = p.getLineNumber(p.getPC());
+    //this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), 1);
     if(p.executeSuccessfully(p.getPC())) s = "true\n";
     this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
-    this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
+   // this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
     ui->console->insertPlainText(QString::fromStdString(to_string(p.getPC())));
     ui->console->insertPlainText(QString::fromStdString(" "));
     ui->console->insertPlainText(QString::fromStdString(to_string(p.getLineNumber(p.getPC()))));

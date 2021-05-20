@@ -123,16 +123,13 @@
       <row/>
       <column>
        <property name="text">
-<<<<<<< HEAD
         <string>Register name</string>
-=======
         <string>Name</string>
        </property>
        <property name="font">
         <font>
          <pointsize>8</pointsize>
         </font>
->>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
        </property>
       </column>
       <column>
@@ -144,8 +141,6 @@
        <property name="text">
         <string>X0</string>
        </property>
-<<<<<<< HEAD
-=======
        <property name="whatsThis">
         <string/>
        </property>
@@ -157,7 +152,6 @@
          <kerning>true</kerning>
         </font>
        </property>
->>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
       </item>
       <item row="1" column="0">
        <property name="text">
@@ -169,14 +163,11 @@
         <string>X2</string>
        </property>
       </item>
-<<<<<<< HEAD
-=======
       <item row="2" column="1">
        <property name="text">
         <string/>
        </property>
       </item>
->>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
       <item row="3" column="0">
        <property name="text">
         <string>X3</string>
@@ -304,20 +295,14 @@
       </item>
       <item row="28" column="0">
        <property name="text">
-<<<<<<< HEAD
         <string>X28</string>
-=======
         <string>SP</string>
->>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
        </property>
       </item>
       <item row="29" column="0">
        <property name="text">
-<<<<<<< HEAD
         <string>X29</string>
-=======
         <string>FP</string>
->>>>>>> bb320656aba7b64d1153fdb2c8cc82f0e91be0a2
        </property>
       </item>
       <item row="30" column="0">
