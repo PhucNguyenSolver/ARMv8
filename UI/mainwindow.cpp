@@ -7,9 +7,26 @@ MainWindow::MainWindow(QWidget *parent)
     , /*ui(new Ui::MainWindow),*/ t(), p()
 {
     ui->setupUi(this);
-    ui->tableWidget->setColumnWidth(0, 50);
-    ui->tableWidget->setColumnWidth(1, 100);
+    ui->regTable->setColumnWidth(0, 50);
+    ui->regTable->setColumnWidth(1, 100);
+    int rowNum = ui->memTable->rowCount();
+    int colNum = ui->memTable->columnCount();
+//    ui->memTable->setItem(0, 0, new QTableWidgetItem(tr("Address")));
+//    for (int i = 1; i<rowNum; i++)
+//        ui->memTable->setItem(i, 0, new QTableWidgetItem(tr((to_string((i-1)*16)).c_str())));
     //QObject::connect(this, SIGNAL(getOutputSignal()), this, SLOT(printOutput()));
+    //ui->memTable->horizontalHeaderItem(0)->setText("Last");
+ //   ui->memTable->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Address")));
+    for(int i = 0; i<rowNum; i++) {
+        char cstr[128];
+        sprintf(cstr, "%#010x", i*16);
+        string out = cstr;
+        ui->memTable->setVerticalHeaderItem(i, new QTableWidgetItem(tr(out.c_str())));
+    }
+    for(int i = 0; i<colNum; i++) {
+        ui->memTable->setHorizontalHeaderItem(i, new QTableWidgetItem(tr(to_string(i).c_str())));
+    }
+    ui->memTable->setStyleSheet("QHeaderView::section { background-color:#BEBEBE }");
 }
 
 MainWindow::~MainWindow()
@@ -152,16 +169,17 @@ void MainWindow::on_assembleButton_clicked()
 
 void MainWindow::updateRegisterTable() {
     for(int i = 0; i<32; i++)
-        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
+        ui->regTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(p.getRegisterValue(i))).c_str())));
        //ui->tableWidget->item(i,0)->setText(((to_string(i)).c_str()));
 }
 
 void MainWindow::updateMemoryTable() {
-    int rowNum = ui->tableWidget_2->rowCount();
-    int colNum = ui->tableWidget_2->columnCount();
-    int memNum = rowNum*colNum;
-    for (int i = 0; i<memNum; i++)
-        ui->tableWidget_2->setItem(i/colNum, i%colNum, new QTableWidgetItem(tr((to_string(p.getMemoryValue(i))).c_str())));
+    int rowNum = ui->memTable->rowCount();
+    int colNum = ui->memTable->columnCount();
+    //int memNum = rowNum*colNum;
+    for(int i = 0; i< rowNum; i++)
+        for(int j = 0; j< colNum; j++)
+            ui->memTable->setItem(i, j, new QTableWidgetItem(tr((to_string(p.getMemoryValue((i)*colNum + j))).c_str())));
 }
 
 void MainWindow::updateLabelTable() {
