@@ -54,8 +54,6 @@ private slots:
 
     void on_assembleButton_clicked();
 
-    void on_tableLabel_activated(const QModelIndex &index);
-
 private:
     static Ui::MainWindow *ui;
     Test t;

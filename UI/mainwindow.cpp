@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tableWidget->setColumnWidth(0, 50);
-    ui->tableWidget->setColumnWidth(1, 70);
+    ui->tableWidget->setColumnWidth(1, 100);
     //QObject::connect(this, SIGNAL(getOutputSignal()), this, SLOT(printOutput()));
 }
 
@@ -166,10 +166,17 @@ void MainWindow::updateMemoryTable() {
 
 void MainWindow::updateLabelTable() {
    map<string, int> mapLabel = p.getLabel();
-   int rowNum = mapLabel.size();
+   map<string, int> mapData = p.getData();
+   int rowNum1 = mapLabel.size();
+   int rowNum2 = mapData.size();
+   int rowNum = rowNum1 + rowNum2;
    ui->labelTable->setRowCount(rowNum);
    int i = 0;
    for (std::map<string,int>::reverse_iterator rit=mapLabel.rbegin(); rit!=mapLabel.rend(); ++rit, ++i) {
+       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
+       ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
+   }
+   for (std::map<string,int>::reverse_iterator rit=mapData.rbegin(); rit!=mapData.rend(); ++rit, ++i) {
        ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
        ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
    }

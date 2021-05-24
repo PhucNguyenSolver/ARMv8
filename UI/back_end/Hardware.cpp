@@ -104,3 +104,7 @@ bool Hardware::Flags::checkFlagCarry(long a, long b)
         return true;
     return false;
 }
+
+map<string, int> Hardware::getData() {
+    return this->_data;
+}

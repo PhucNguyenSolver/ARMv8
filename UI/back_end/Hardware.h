@@ -20,6 +20,7 @@ public:
     long getFloatRegister(string reg_name);
     void setFloatRegister(string reg_name, float value);
     void pushData(string data);
+    map<string, int> getData();
     int indexOf(string reg_name); //TODO: rename this method
     void log(int bytes = 40);
     
