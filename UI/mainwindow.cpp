@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->tableWidget->setColumnWidth(0, 50);
     ui->tableWidget->setColumnWidth(1, 100);
+
     //QObject::connect(this, SIGNAL(getOutputSignal()), this, SLOT(printOutput()));
 }
 

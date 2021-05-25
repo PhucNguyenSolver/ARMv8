@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assemble.png</file>
+        <file>reset.png</file>
+        <file>runAll.png</file>
+        <file>runStep.png</file>
+    </qresource>
+</RCC>

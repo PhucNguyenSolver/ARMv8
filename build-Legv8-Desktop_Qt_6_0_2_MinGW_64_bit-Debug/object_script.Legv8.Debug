@@ -10,5 +10,6 @@ debug/memory.o
 debug/program.o
 debug/register.o
 debug/utils.o
+debug/qrc_images.o
 debug/moc_CodeEditor.o
 debug/moc_mainwindow.o

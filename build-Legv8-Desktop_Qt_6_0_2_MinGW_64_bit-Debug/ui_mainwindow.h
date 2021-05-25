@@ -35,15 +35,15 @@ public:
     QGridLayout *gridLayout_2;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_4;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_5;
-    QPushButton *RunAll;
-    QPushButton *assembleButton;
-    QPushButton *stepButton;
-    QPushButton *resetButton;
-    QPushButton *testButton;
     QTextEdit *console;
     CodeEditor *codeText;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_5;
+    QPushButton *assembleButton;
+    QPushButton *resetButton;
+    QPushButton *stepButton;
+    QPushButton *testButton;
+    QPushButton *RunAll;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_3;
     QTableWidget *tableWidget_2;
@@ -73,38 +73,6 @@ public:
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         gridLayout_4 = new QGridLayout(groupBox_4);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        groupBox_2 = new QGroupBox(groupBox_4);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        gridLayout_5 = new QGridLayout(groupBox_2);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        RunAll = new QPushButton(groupBox_2);
-        RunAll->setObjectName(QString::fromUtf8("RunAll"));
-
-        gridLayout_5->addWidget(RunAll, 0, 0, 1, 1);
-
-        assembleButton = new QPushButton(groupBox_2);
-        assembleButton->setObjectName(QString::fromUtf8("assembleButton"));
-
-        gridLayout_5->addWidget(assembleButton, 0, 1, 1, 1);
-
-        stepButton = new QPushButton(groupBox_2);
-        stepButton->setObjectName(QString::fromUtf8("stepButton"));
-
-        gridLayout_5->addWidget(stepButton, 0, 2, 1, 1);
-
-        resetButton = new QPushButton(groupBox_2);
-        resetButton->setObjectName(QString::fromUtf8("resetButton"));
-
-        gridLayout_5->addWidget(resetButton, 0, 3, 1, 1);
-
-        testButton = new QPushButton(groupBox_2);
-        testButton->setObjectName(QString::fromUtf8("testButton"));
-
-        gridLayout_5->addWidget(testButton, 0, 4, 1, 1);
-
-
-        gridLayout_4->addWidget(groupBox_2, 0, 0, 1, 1);
-
         console = new QTextEdit(groupBox_4);
         console->setObjectName(QString::fromUtf8("console"));
         console->setMaximumSize(QSize(16777215, 150));
@@ -116,6 +84,94 @@ public:
         codeText->setObjectName(QString::fromUtf8("codeText"));
 
         gridLayout_4->addWidget(codeText, 1, 0, 1, 1);
+
+        groupBox_2 = new QGroupBox(groupBox_4);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        gridLayout_5 = new QGridLayout(groupBox_2);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        assembleButton = new QPushButton(groupBox_2);
+        assembleButton->setObjectName(QString::fromUtf8("assembleButton"));
+        assembleButton->setMaximumSize(QSize(30, 30));
+        assembleButton->setCursor(QCursor(Qt::PointingHandCursor));
+        assembleButton->setStyleSheet(QString::fromUtf8("#assembleButton {\n"
+"background-color: transparent;\n"
+"border-image: url(:assemble.png);\n"
+"background: none;\n"
+"border: none;\n"
+"background-repeat: none;\n"
+"}\n"
+"#assembleButton:hover { \n"
+"	background-color:  yellow;\n"
+"	\n"
+" }"));
+
+        gridLayout_5->addWidget(assembleButton, 0, 1, 1, 1);
+
+        resetButton = new QPushButton(groupBox_2);
+        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+        resetButton->setMaximumSize(QSize(30, 30));
+        resetButton->setCursor(QCursor(Qt::PointingHandCursor));
+        resetButton->setMouseTracking(false);
+        resetButton->setTabletTracking(false);
+        resetButton->setStyleSheet(QString::fromUtf8("#resetButton {\n"
+"background-color: transparent;\n"
+"border-image: url(:reset.png);\n"
+"background: none;\n"
+"border: none;\n"
+"background-repeat: none;\n"
+"}\n"
+"\n"
+"#resetButton:hover { \n"
+"	background-color:  yellow;\n"
+"	\n"
+" }\n"
+""));
+        resetButton->setFlat(false);
+
+        gridLayout_5->addWidget(resetButton, 0, 3, 1, 1);
+
+        stepButton = new QPushButton(groupBox_2);
+        stepButton->setObjectName(QString::fromUtf8("stepButton"));
+        stepButton->setMaximumSize(QSize(30, 30));
+        stepButton->setCursor(QCursor(Qt::PointingHandCursor));
+        stepButton->setStyleSheet(QString::fromUtf8("#stepButton {\n"
+"background-color: transparent;\n"
+"border-image: url(:runStep.png);\n"
+"background: none;\n"
+"border: none;\n"
+"background-repeat: none;\n"
+"}\n"
+"#stepButton:hover { \n"
+"	background-color:  yellow;\n"
+" }"));
+
+        gridLayout_5->addWidget(stepButton, 0, 2, 1, 1);
+
+        testButton = new QPushButton(groupBox_2);
+        testButton->setObjectName(QString::fromUtf8("testButton"));
+
+        gridLayout_5->addWidget(testButton, 0, 4, 1, 1);
+
+        RunAll = new QPushButton(groupBox_2);
+        RunAll->setObjectName(QString::fromUtf8("RunAll"));
+        RunAll->setMaximumSize(QSize(30, 30));
+        RunAll->setCursor(QCursor(Qt::PointingHandCursor));
+        RunAll->setStyleSheet(QString::fromUtf8("#RunAll {\n"
+"background-color: transparent;\n"
+"border-image: url(:runAll.png);\n"
+"background: none;\n"
+"border: none;\n"
+"background-repeat: none;\n"
+"}\n"
+"#RunAll:hover { \n"
+"	background-color:  yellow;\n"
+"	\n"
+" }"));
+
+        gridLayout_5->addWidget(RunAll, 0, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(groupBox_2, 0, 0, 1, 1);
 
 
         gridLayout_2->addWidget(groupBox_4, 0, 0, 1, 1);
@@ -352,12 +408,13 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         groupBox->setTitle(QString());
         groupBox_4->setTitle(QString());
+        codeText->setPlainText(QString());
         groupBox_2->setTitle(QString());
-        RunAll->setText(QCoreApplication::translate("MainWindow", "RunAll", nullptr));
-        assembleButton->setText(QCoreApplication::translate("MainWindow", "Assemble", nullptr));
-        stepButton->setText(QCoreApplication::translate("MainWindow", "Step", nullptr));
-        resetButton->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
+        assembleButton->setText(QString());
+        resetButton->setText(QString());
+        stepButton->setText(QString());
         testButton->setText(QCoreApplication::translate("MainWindow", "Test", nullptr));
+        RunAll->setText(QString());
         groupBox_3->setTitle(QString());
 
         const bool __sortingEnabled = tableWidget_2->isSortingEnabled();

@@ -33,50 +33,6 @@
           <string/>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <widget class="QGroupBox" name="groupBox_2">
-            <property name="title">
-             <string/>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
-              <widget class="QPushButton" name="RunAll">
-               <property name="text">
-                <string>RunAll</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="assembleButton">
-               <property name="text">
-                <string>Assemble</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QPushButton" name="stepButton">
-               <property name="text">
-                <string>Step</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QPushButton" name="resetButton">
-               <property name="text">
-                <string>Reset</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="4">
-              <widget class="QPushButton" name="testButton">
-               <property name="text">
-                <string>Test</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
           <item row="2" column="0">
            <widget class="QTextEdit" name="console">
             <property name="maximumSize">
@@ -91,7 +47,153 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="CodeEditor" name="codeText"/>
+           <widget class="CodeEditor" name="codeText">
+            <property name="plainText">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="1">
+              <widget class="QPushButton" name="assembleButton">
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#assembleButton {
+background-color: transparent;
+border-image: url(:assemble.png);
+background: none;
+border: none;
+background-repeat: none;
+}
+#assembleButton:hover { 
+	background-color:  yellow;
+	
+ }</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QPushButton" name="resetButton">
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="mouseTracking">
+                <bool>false</bool>
+               </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#resetButton {
+background-color: transparent;
+border-image: url(:reset.png);
+background: none;
+border: none;
+background-repeat: none;
+}
+
+#resetButton:hover { 
+	background-color:  yellow;
+	
+ }
+</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="flat">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="stepButton">
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#stepButton {
+background-color: transparent;
+border-image: url(:runStep.png);
+background: none;
+border: none;
+background-repeat: none;
+}
+#stepButton:hover { 
+	background-color:  yellow;
+ }</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QPushButton" name="testButton">
+               <property name="text">
+                <string>Test</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QPushButton" name="RunAll">
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#RunAll {
+background-color: transparent;
+border-image: url(:runAll.png);
+background: none;
+border: none;
+background-repeat: none;
+}
+#RunAll:hover { 
+	background-color:  yellow;
+	
+ }</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>

@@ -10,5 +10,6 @@ release/memory.o
 release/program.o
 release/register.o
 release/utils.o
+release/qrc_images.o
 release/moc_CodeEditor.o
 release/moc_mainwindow.o
