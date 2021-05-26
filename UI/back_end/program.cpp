@@ -7,8 +7,31 @@ using namespace std;
 
 const int MEMORY_SIZE = (int)10e6;
 
+#define UI_MODE // comment this line to run on terminal only
+#ifndef UI_MODE
+#include <sstream>
+class MainWindow // API to UI::MainWindow
+{
+public:
+    static stringstream buffer;
+    void printOutput(string something);
+    void printOutput();
+};
 
-Program::Program() { hardware = new Hardware(MEMORY_SIZE); }
+void MainWindow::printOutput() { cout << buffer.str(); }
+void MainWindow::printOutput(string something)
+{
+    buffer << something;
+    printOutput();
+}
+
+stringstream MainWindow::buffer;
+#endif // UI_MODE
+
+Program::Program()
+{
+    hardware = new Hardware(MEMORY_SIZE);
+}
 
 Program::~Program() // TODO: delete Instruction correctly
 {
@@ -19,7 +42,7 @@ void Program::setSource(string src) { this->_source = src; }
 
 bool Program::assembleSuccessfully()
 {
-    PreProcess source(this->_source); // TODO: flush before preprocess
+    PreProcess source(this->_source);
 
     // Load data
     //int top = 0;
@@ -31,25 +54,15 @@ bool Program::assembleSuccessfully()
         }
         catch (...)
         {
-            cout << "Cannot load data: \n"
-                 << var;
+            MainWindow::buffer << "Cannot load data from this line: \n"
+                               << var << endl;
             return false;
         }
     }
 
-// #if 1
-//         cout << "Log data\n";
-//         logVector(source.data);
-//         cout << "Log source\n";
-//         logVector(source.instructions);
-//         cout << "Log label\n";
-//         for (auto p: source.label)
-//             cout << p.first << ": " << p.second << endl;
-// #endif
-
     // Load instruction
     int size = source.instructions.size();
-    for (int i=0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         try
         {
@@ -58,50 +71,61 @@ bool Program::assembleSuccessfully()
         }
         catch (...)
         {
-            cout << "Unknown instruction: \n"
-                 << source.instructions[i];
+            MainWindow::buffer << "Unknown instruction: \n"
+                               << source.instructions[i] << endl;
             return false;
         }
     }
-    // Load label
     return true;
 }
 
 bool Program::executeSuccessfully(int instructionId)
 {
-    int PC = getPC();
-    if (0 <= PC && PC < (int)instructions.size())
+    int currentPC = getPC();
+    if (currentPC < 0 || currentPC >= (int)instructions.size())
+        return false;
+
+    try
     {
         hardware->PC++;
-       // PC = getPC();
-        instructions[getPC() - 1]->execute();
-        return true;
+        instructions[currentPC]->execute();
     }
-    else
+    catch (...)
+    {
+        MainWindow::buffer << "A Runtime Error has occurred.\n\n"
+                           << "Line: " << lineNumber[currentPC] << "\nError: !!!\n";
         return false;
+    }
+    return true;
 }
 
+/**
+ * Re-assemble then run all.
+ * 
+ * Throw exception when encounter failed execution.
+ */
 void Program::runAll()
 {
-    // flush all
     reset();
-    // re-assemble
-    assert(assembleSuccessfully());
-    while (executeSuccessfully(getPC())); // running
-    cout << "Program finished running\n";
+    if (assembleSuccessfully())
+    {
+        MainWindow::printOutput("-------Program starts running-------\n");
+        while (executeSuccessfully(getPC()))
+            ; // running
+        MainWindow::printOutput("-------Program finished running-------\n");
+    }
 }
 
 void Program::reset()
 {
     delete hardware;
     hardware = new Hardware(MEMORY_SIZE);
-    for (auto ins: instructions)
+    for (auto ins : instructions)
         delete ins; // warning
     instructions.clear();
 }
 
 int Program::getPC() { return hardware->PC; }
-
 
 void Program::pushInstruction(string raw)
 {
@@ -124,7 +148,8 @@ void Program::pushInstruction(string raw)
         throw "Invalid instruction";
 }
 
-void Program::pushLineNumber(int i) {
+void Program::pushLineNumber(int i)
+{
     lineNumber.push_back(i);
 }
 
@@ -139,20 +164,25 @@ void Program::log()
     hardware->log();
 }
 
-long Program::getRegisterValue(int index) {
+long Program::getRegisterValue(int index)
+{
     return hardware->_reg->Get(index);
 }
 
-int Program::getLineNumber(int index) {
+int Program::getLineNumber(int index)
+{
     return lineNumber[index];
 }
 
-map<string, int> Program::getLabel() {
+map<string, int> Program::getLabel()
+{
     return PreProcess::label;
 }
-map<string, int> Program::getData() {
+map<string, int> Program::getData()
+{
     return hardware->getData();
 }
-int Program::getMemoryValue(int index) {
-    return int(*((char*)(hardware->_mem->get(index))));
+int Program::getMemoryValue(int index)
+{
+    return int(*((char *)(hardware->_mem->get(index))));
 }

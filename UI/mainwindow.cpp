@@ -58,6 +58,11 @@ void MainWindow::printOutput() {
     buffer.str("");
 }
 
+void MainWindow::printOutput(string msg) {
+    MainWindow::buffer << msg;
+    MainWindow::printOutput();
+}
+
 void MainWindow::highlightLine(QPlainTextEdit* edit, int number, int previous) {
     //QTextDocument *doc = edit->document();
     ///QTextEdit::ExtraSelection selection = doc->findBlockByLineNumber(number);
@@ -90,10 +95,10 @@ void MainWindow::on_RunAll_clicked()
 //       // ui->tableWidget->setItem(i, 0, new QTableWidgetItem(tr((to_string(i*3)).c_str())));
 //       ui->tableWidget->item(i,0)->setText(((to_string(i*3)).c_str()));
     p.setSource((ui->codeText->toPlainText()).toStdString());
-    string s = "false";
-    if(p.assembleSuccessfully()) s = "true";
-    QString qstr = QString::fromStdString(s);
-    ui->console->insertPlainText(qstr);
+    if (p.assembleSuccessfully())
+        printOutput("-----Assembled succesfully-----\n");
+    else
+        printOutput(); // Print error messages from buffer
     p.runAll();
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
@@ -140,24 +145,26 @@ void MainWindow::on_resetButton_clicked()
 
 void MainWindow::on_stepButton_clicked()
 {
-    string s = "false\n";
     int previous_instruction = p.getLineNumber(p.getPC());
-    if(p.executeSuccessfully(p.getPC())) s = "true\n";
-    this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
-    QString qstr = QString::fromStdString(s);
-    ui->console->insertPlainText(qstr);
+    highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
-   // this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
-    ui->console->insertPlainText(QString::fromStdString(to_string(p.getPC())));
-    ui->console->insertPlainText(QString::fromStdString(" "));
-    ui->console->insertPlainText(QString::fromStdString(to_string(p.getLineNumber(p.getPC()))));
+
+    if(p.executeSuccessfully(1))
+        printOutput(" | ");
+    else
+        printOutput(); // display error messages from buffer
+//    this->highlightLine(ui->codeText, p.getPC(), previous_instruction);
+//    ui->console->insertPlainText(QString::fromStdString(to_string(p.getPC())));
+//    ui->console->insertPlainText(QString::fromStdString(" "));
+//    ui->console->insertPlainText(QString::fromStdString(to_string(p.getLineNumber(p.getPC()))));
 }
 void MainWindow::on_assembleButton_clicked()
 {
-    p.setSource((ui->codeText->toPlainText()).toStdString());
-    string s = "false\n";
-    if(p.assembleSuccessfully()) s = "true\n";
+    printOutput("Assembling...\n");
+    if(p.assembleSuccessfully())
+        printOutput("Assemble succesfully");
+
     MainWindow::updateRegisterTable();
     this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), 0);
     QString qstr = QString::fromStdString(s);

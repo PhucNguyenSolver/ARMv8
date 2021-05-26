@@ -43,6 +43,7 @@ public:
     static QString getInput();
     static QString getInputWithMessage(string msg);
     static void printOutput();
+    static void printOutput(string msg); // new
     void highlightLine(QPlainTextEdit* text, int number, int previous);
 private slots:
 
