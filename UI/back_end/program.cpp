@@ -52,12 +52,6 @@ bool Program::assembleSuccessfully()
         {
             this->pushData(var);
         }
-        catch (const char* msg)
-        {
-            MainWindow::buffer << "Cannot load data from this line and: \n"
-                               << var << endl << msg;
-            return false;
-        }
         catch (...)
         {
             MainWindow::buffer << "Cannot load data from this line: \n"
@@ -75,11 +69,6 @@ bool Program::assembleSuccessfully()
             this->pushInstruction(source.instructions[i]);
             this->pushLineNumber(source.lineNumber[i]);
         }
-        catch (const char* msg)
-        {
-            MainWindow::buffer << msg << endl;
-            return false;
-        }
         catch (...)
         {
             MainWindow::buffer << "Unknown instruction: \n"
@@ -94,11 +83,7 @@ bool Program::executeSuccessfully(int instructionId)
 {
     int currentPC = getPC();
     if (currentPC < 0 || currentPC >= (int)instructions.size())
-    {
-        MainWindow::buffer << "-----Program finished running-----\n";
         return false;
-    }
-
 
     try
     {
@@ -114,8 +99,9 @@ bool Program::executeSuccessfully(int instructionId)
     return true;
 }
 
-/** Re-assemble then run all.
- * 
+/**
+ * Re-assemble then run all.
+ *
  * Throw exception when encounter failed execution.
  */
 void Program::runAll()
@@ -143,39 +129,23 @@ int Program::getPC() { return hardware->PC; }
 
 void Program::pushInstruction(string raw)
 {
-    Instruction::IType type;
-    try {
-        type = Instruction::instructionType(raw);
-    }
-    catch (const char* msg)
-    {
-        string errorMessage = (string) "Cannot push instruction:\n" + msg;
-        throw errorMessage.c_str();
-    }
-
-    try
-    {
-        if (type == Instruction::IType::R)
-            instructions.push_back(new RInstruction(hardware, raw));
-        else if (type == Instruction::IType::I)
-            instructions.push_back(new IInstruction(hardware, raw));
-        else if (type == Instruction::IType::D)
-            instructions.push_back(new DInstruction(hardware, raw));
-        else if (type == Instruction::IType::B)
-            instructions.push_back(new BInstruction(hardware, raw));
-        else if (type == Instruction::IType::CB)
-            instructions.push_back(new CBInstruction(hardware, raw));
-        else if (type == Instruction::IType::PI)
-            instructions.push_back(new PIInstruction(hardware, raw));
-        else if (type == Instruction::IType::Syscall)
-            instructions.push_back(new SyscallInstruction(hardware, raw));
-    }
-    catch (...)
-    {
-        // string errorMessage = (string) "Cannot push instruction:\n" + msg;
-        // throw errorMessage.c_str();
-        throw "Cannot push instruction.\n";
-    }
+    Instruction::IType type = Instruction::instructionType(raw);
+    if (type == Instruction::IType::R)
+        instructions.push_back(new RInstruction(hardware, raw));
+    else if (type == Instruction::IType::I)
+        instructions.push_back(new IInstruction(hardware, raw));
+    else if (type == Instruction::IType::D)
+        instructions.push_back(new DInstruction(hardware, raw));
+    else if (type == Instruction::IType::B)
+        instructions.push_back(new BInstruction(hardware, raw));
+    else if (type == Instruction::IType::CB)
+        instructions.push_back(new CBInstruction(hardware, raw));
+    else if (type == Instruction::IType::PI)
+        instructions.push_back(new PIInstruction(hardware, raw));
+    else if (type == Instruction::IType::Syscall)
+        instructions.push_back(new SyscallInstruction(hardware, raw));
+    else
+        throw "Invalid instruction";
 }
 
 void Program::pushLineNumber(int i)

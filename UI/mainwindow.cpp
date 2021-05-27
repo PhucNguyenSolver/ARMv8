@@ -139,6 +139,7 @@ void MainWindow::on_testButton_clicked()
 void MainWindow::on_resetButton_clicked()
 {
     this->highlightLine(ui->codeText, -1, p.getLineNumber(p.getPC()));
+    checkAssemble = false;
     p.reset();
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
@@ -190,6 +191,7 @@ void MainWindow::on_assembleButton_clicked()
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
     MainWindow::updateLabelTable();
+
 }
 
 void MainWindow::updateRegisterTable() {
@@ -215,10 +217,10 @@ void MainWindow::updateLabelTable() {
    int rowNum = rowNum1 + rowNum2;
    ui->labelTable->setRowCount(rowNum);
    int i = 0;
-   for (std::map<string,int>::reverse_iterator rit=mapLabel.rbegin(); rit!=mapLabel.rend(); ++rit, ++i) {
-       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
-       ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
-   }
+//   for (std::map<string,int>::reverse_iterator rit=mapLabel.rbegin(); rit!=mapLabel.rend(); ++rit, ++i) {
+//       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
+//       ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
+//   }
    for (std::map<string,int>::reverse_iterator rit=mapData.rbegin(); rit!=mapData.rend(); ++rit, ++i) {
        ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
        ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
