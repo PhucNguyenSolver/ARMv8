@@ -45,6 +45,7 @@ public:
     static void printOutput();
     static void printOutput(string msg); // new
     void highlightLine(QPlainTextEdit* text, int number, int previous);
+
 private slots:
 
     void on_RunAll_clicked();
@@ -55,9 +56,12 @@ private slots:
 
     void on_assembleButton_clicked();
 
+
 private:
     static Ui::MainWindow *ui;
     Test t;
     Program p;
+    static bool checkAssemble;
+
 };
 #endif // MAINWINDOW_H

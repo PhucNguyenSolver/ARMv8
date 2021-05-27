@@ -48,6 +48,11 @@
           </item>
           <item row="1" column="0">
            <widget class="CodeEditor" name="codeText">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
             <property name="plainText">
              <string/>
             </property>
@@ -204,6 +209,187 @@ background-repeat: none;
           <string/>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
+          <item row="2" column="1" colspan="2">
+           <widget class="QTableWidget" name="memTable">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>351</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContents</enum>
+            </property>
+            <property name="autoScrollMargin">
+             <number>16</number>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="showGrid">
+             <bool>true</bool>
+            </property>
+            <property name="rowCount">
+             <number>60</number>
+            </property>
+            <property name="columnCount">
+             <number>16</number>
+            </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>10</number>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>35</number>
+            </attribute>
+            <attribute name="verticalHeaderVisible">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderMinimumSectionSize">
+             <number>15</number>
+            </attribute>
+            <attribute name="verticalHeaderDefaultSectionSize">
+             <number>30</number>
+            </attribute>
+            <attribute name="verticalHeaderHighlightSections">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+             <bool>false</bool>
+            </attribute>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+           </widget>
+          </item>
+          <item row="4" column="0" rowspan="2" colspan="2">
+           <widget class="QTableWidget" name="labelTable">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="rowCount">
+             <number>0</number>
+            </property>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>70</number>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>200</number>
+            </attribute>
+            <attribute name="verticalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Address</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Label&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
           <item row="2" column="0">
            <widget class="QTableWidget" name="regTable">
             <property name="maximumSize">
@@ -659,7 +845,7 @@ background-repeat: none;
             </item>
            </widget>
           </item>
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QLabel" name="label">
             <property name="maximumSize">
              <size>
@@ -672,186 +858,11 @@ background-repeat: none;
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Label&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QTableWidget" name="labelTable">
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
-            <property name="rowCount">
-             <number>0</number>
-            </property>
-            <attribute name="verticalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <column>
-             <property name="text">
-              <string>Name</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Address</string>
-             </property>
-            </column>
-           </widget>
-          </item>
-          <item row="0" column="1" colspan="2">
+          <item row="1" column="1">
            <widget class="QLabel" name="label_2">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Memory&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
-           </widget>
-          </item>
-          <item row="2" column="1" colspan="2">
-           <widget class="QTableWidget" name="memTable">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>351</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>9</pointsize>
-             </font>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QAbstractScrollArea::AdjustToContents</enum>
-            </property>
-            <property name="autoScrollMargin">
-             <number>16</number>
-            </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
-            <property name="showGrid">
-             <bool>true</bool>
-            </property>
-            <property name="rowCount">
-             <number>60</number>
-            </property>
-            <property name="columnCount">
-             <number>16</number>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>10</number>
-            </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>35</number>
-            </attribute>
-            <attribute name="verticalHeaderVisible">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>15</number>
-            </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>30</number>
-            </attribute>
-            <attribute name="verticalHeaderHighlightSections">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-             <bool>false</bool>
-            </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
            </widget>
           </item>
          </layout>

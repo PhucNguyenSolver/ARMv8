@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 //#include "back_end/program.cpp"
 Ui::MainWindow* MainWindow::ui = new Ui::MainWindow;
+bool MainWindow::checkAssemble(false);
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , /*ui(new Ui::MainWindow),*/ t(), p()
@@ -55,6 +56,9 @@ void MainWindow::printOutput() {
     string s = buffer.str();
     QString qstr = QString::fromStdString(s);
     ui->console->insertPlainText(qstr);
+    QTextCursor c = ui->console->textCursor();
+    c.movePosition(QTextCursor::End);
+    ui->console->setTextCursor(c);
     buffer.str("");
 }
 
@@ -145,6 +149,8 @@ void MainWindow::on_resetButton_clicked()
 
 void MainWindow::on_stepButton_clicked()
 {
+    if(!checkAssemble) MainWindow::on_assembleButton_clicked();
+    int previous_instruction = p.getLineNumber(p.getPC());
     if(!p.executeSuccessfully(-1))
     {
         printOutput(); // display error messages from buffer
@@ -153,7 +159,9 @@ void MainWindow::on_stepButton_clicked()
 
     printOutput(" | ");
 
-    int previous_instruction = p.getLineNumber(p.getPC());
+  //  int previous_instruction = p.getLineNumber(p.getPC());
+//    printOutput(to_string(previous_instruction));
+//    printOutput(to_string(p.getLineNumber(p.getPC())));
     highlightLine(ui->codeText, p.getLineNumber(p.getPC()), previous_instruction);
     MainWindow::updateRegisterTable();
     MainWindow::updateMemoryTable();
@@ -164,6 +172,8 @@ void MainWindow::on_stepButton_clicked()
 }
 void MainWindow::on_assembleButton_clicked()
 {
+    if(checkAssemble) {return;}
+    p.reset();
     printOutput("Assembling...\n");
     p.setSource((ui->codeText->toPlainText()).toStdString());
 
@@ -174,7 +184,7 @@ void MainWindow::on_assembleButton_clicked()
     }
 
     printOutput("-------Assembled succesfully-------\n");
-
+    checkAssemble = true;
     MainWindow::updateRegisterTable();
     this->highlightLine(ui->codeText, p.getLineNumber(p.getPC()), 0);
     MainWindow::updateRegisterTable();
@@ -214,3 +224,4 @@ void MainWindow::updateLabelTable() {
        ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
    }
 }
+
