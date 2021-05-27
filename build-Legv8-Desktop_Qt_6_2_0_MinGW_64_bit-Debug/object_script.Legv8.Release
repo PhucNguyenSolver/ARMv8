@@ -1,0 +1,15 @@
+release/CodeEditor.o
+release/LineNumberArea.o
+release/testConstructor.o
+release/main.o
+release/mainwindow.o
+release/FloatRegister.o
+release/Hardware.o
+release/Instruction.o
+release/memory.o
+release/program.o
+release/register.o
+release/utils.o
+release/qrc_images.o
+release/moc_CodeEditor.o
+release/moc_mainwindow.o
