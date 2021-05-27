@@ -42,11 +42,19 @@ void Hardware::setFloatRegister(string reg_name, float value) { _floatReg->Set(i
 
 void Hardware::pushData(string data)
 {
-    stringstream ss(data);
-    string data_name;
-    ss >> data_name;
-    _data[data_name] = _mem->getTop();
-    _mem->loadVariable(data.substr(data_name.length() + 1, data.length()));
+    // try
+    // {
+        stringstream ss(data);
+        string data_name;
+        ss >> data_name;
+        _data[data_name] = _mem->getTop();
+        _mem->loadVariable(data.substr(data_name.length() + 1, data.length()));
+    // }
+    // catch(const char* msg)
+    // {
+    //     throw msg;
+    // }
+    
 }
 
 void Hardware::log(int bytes)

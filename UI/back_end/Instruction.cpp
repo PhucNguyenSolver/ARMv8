@@ -27,30 +27,33 @@ Instruction::Instruction(Hardware *hardware, string s) : hardware(hardware)
 
 Instruction::IType Instruction::instructionType(string s) // TODO: add defined instruction to sets
 {
-    vector<string> insWord = Parsing::parseTokens(s);
-    vector<string> CBSet{"CBZ", "CBNZ", "B.NE", "B.EQ", "B.LT", "B.LE", "B.GT", "B.GE", "B.HS"};
-    vector<string> RSet{"ADD", "AND", "SUB", "EOR", "LSL", "LSR", "ORR", "AND", "BR", "FADDS", "FCMPS", "FDIVS", "FMULS", "FSUBS"};
-    vector<string> ISet{"ADDI", "ANDI", "SUBI", "ADDIS", "ANDIS", "SUBIS", "EORI", "ORRI"};
-    vector<string> DSet{"LDUR", "LDURB", "LDURH", "LDURSW", "LDXR", "STUR", "STURB", "LDURH", "LDURSW", "LDXR"};
-    // 10 types
-    vector<string> BSet{"B", "BL"};
-    vector<string> PISet{"CMP", "CMPI", "LDA", "MOV"};
-    if (find(RSet.begin(), RSet.end(), insWord[0]) != RSet.end())
+    static vector<string> CBSet{"CBZ", "CBNZ", "B.NE", "B.EQ", "B.LT", "B.LE", "B.GT", "B.GE", "B.HS"};
+    static vector<string> RSet{"ADD", "AND", "SUB", "EOR", "LSL", "LSR", "ORR", "AND", "BR", "FADDS", "FCMPS", "FDIVS", "FMULS", "FSUBS"};
+    static vector<string> ISet{"ADDI", "ANDI", "SUBI", "ADDIS", "ANDIS", "SUBIS", "EORI", "ORRI"};
+    static vector<string> DSet{"LDUR", "LDURB", "LDURH", "LDURSW", "LDXR", "STUR", "STURB", "LDURH", "LDURSW", "LDXR"}; // 10 types
+    static vector<string> BSet{"B", "BL"};
+    static vector<string> PISet{"CMP", "CMPI", "LDA", "MOV"};
+
+    string name = Parsing::parseTokens(s)[0];
+    if (find(RSet.begin(), RSet.end(), name) != RSet.end())
         return IType::R;
-    else if (find(ISet.begin(), ISet.end(), insWord[0]) != ISet.end())
+    else if (find(ISet.begin(), ISet.end(), name) != ISet.end())
         return IType::I;
-    else if (find(DSet.begin(), DSet.end(), insWord[0]) != DSet.end())
+    else if (find(DSet.begin(), DSet.end(), name) != DSet.end())
         return IType::D;
-    else if (find(BSet.begin(), BSet.end(), insWord[0]) != BSet.end())
+    else if (find(BSet.begin(), BSet.end(), name) != BSet.end())
         return IType::B;
-    else if (find(CBSet.begin(), CBSet.end(), insWord[0]) != CBSet.end())
+    else if (find(CBSet.begin(), CBSet.end(), name) != CBSet.end())
         return IType::CB;
-    else if (find(PISet.begin(), PISet.end(), insWord[0]) != PISet.end())
+    else if (find(PISet.begin(), PISet.end(), name) != PISet.end())
         return IType::PI;
-    else if (insWord[0] == "syscall")
+    else if (name == "syscall")
         return IType::Syscall;
     else
-        throw "Undefined instruction";
+    {
+        string errorMessage = "Undefined instruction: " + name;
+        throw errorMessage.c_str();
+    }
 }
 
 /*-----------------------------*/

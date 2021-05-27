@@ -116,7 +116,11 @@ void Memory::loadVariable(string raw)
             top += space;
         }
         else // TODO: add ascii
-            cout << "Invalid type: " << header << endl;
+        {
+            string errorMessage = "Unknown data type: " + header;
+            throw errorMessage.c_str();
+            //            throw "Unknown data type: ";
+        }
     }
 }
 
