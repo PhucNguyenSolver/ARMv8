@@ -231,9 +231,9 @@ void MainWindow::updateLabelTable() {
 void MainWindow::on_textEdit_textChanged() {
 //    if(ui->textEdit->toPl
     QString textEdit = ui->textEdit->toPlainText();
-    if(textEdit.isEmpty()) return;
     ui->memTable->item(preNum/16, preNum%16)->setBackground(Qt::white);
+    if(textEdit.isEmpty()) return;
     int num = preNum = textEdit.toInt();
-    ui->memTable->item(num/16, num%16)->setBackground(Qt::yellow);
+    ui->memTable->item(num/16, num%16)->setBackground(Qt::gray);
 }
 
