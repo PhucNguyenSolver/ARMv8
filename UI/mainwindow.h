@@ -56,12 +56,13 @@ private slots:
 
     void on_assembleButton_clicked();
 
+    void on_textEdit_textChanged();
 
 private:
     static Ui::MainWindow *ui;
     Test t;
     Program p;
     static bool checkAssemble;
-
+    int preNum; //white background mem table
 };
 #endif // MAINWINDOW_H

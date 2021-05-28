@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->memTable->setHorizontalHeaderItem(i, new QTableWidgetItem(tr(to_string(i).c_str())));
     }
     ui->memTable->setStyleSheet("QHeaderView::section { background-color:#BEBEBE }");
+    preNum = 0;
 }
 
 MainWindow::~MainWindow()
@@ -225,5 +226,14 @@ void MainWindow::updateLabelTable() {
        ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
        ui->labelTable->setItem(i, 1, new QTableWidgetItem(tr((to_string(rit->second)).c_str())));
    }
+}
+
+void MainWindow::on_textEdit_textChanged() {
+//    if(ui->textEdit->toPl
+    QString textEdit = ui->textEdit->toPlainText();
+    if(textEdit.isEmpty()) return;
+    ui->memTable->item(preNum/16, preNum%16)->setBackground(Qt::white);
+    int num = preNum = textEdit.toInt();
+    ui->memTable->item(num/16, num%16)->setBackground(Qt::yellow);
 }
 
