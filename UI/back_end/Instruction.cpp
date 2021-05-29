@@ -51,7 +51,7 @@ Instruction::IType Instruction::instructionType(string s) // TODO: add defined i
         return IType::Syscall;
     else
     {
-        string errorMessage = "Undefined instruction: " + name;
+        string errorMessage = "undefined instruction here [" + name + "]";
         throw errorMessage.c_str();
     }
 }
@@ -574,6 +574,9 @@ void SyscallInstruction::execute()
         hardware->setFloatRegister("F0", out); // TODO: check this
     }
     default:
-        throw "Unknown syscall.";
+    {
+        string errorMessage = (string)"unknown syscall" + to_string(value);
+        throw errorMessage.c_str();
+    }
     }
 }

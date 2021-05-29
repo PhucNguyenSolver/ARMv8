@@ -52,9 +52,15 @@ bool Program::assembleSuccessfully()
         {
             this->pushData(var);
         }
+        catch (const char * msg)
+        {
+            MainWindow::buffer << "Cannot load data from this line: "
+                               << "[" << var << "]\n" << msg << endl;
+            return false;
+        }
         catch (...)
         {
-            MainWindow::buffer << "Cannot load data from this line: \n"
+            MainWindow::buffer << "Cannot load data from this line: "
                                << var << endl;
             return false;
         }
@@ -69,9 +75,17 @@ bool Program::assembleSuccessfully()
             this->pushInstruction(source.instructions[i]);
             this->pushLineNumber(source.lineNumber[i]);
         }
+        catch (const char* msg)
+        {
+            MainWindow::buffer << "Unknown instruction at line "
+                               << source.lineNumber[i] + 1 << ": "
+                               << msg << endl;
+            return false;
+        }
         catch (...)
         {
-            MainWindow::buffer << "Unknown instruction: \n"
+            MainWindow::buffer << "Unknown instruction at line "
+                               << source.lineNumber[i] + 1 << ": "
                                << source.instructions[i] << endl;
             return false;
         }
@@ -92,7 +106,7 @@ bool Program::executeSuccessfully(int instructionId)
     }
     catch (...)
     {
-        MainWindow::buffer << "A Runtime Error has occurred.\n\n"
+        MainWindow::buffer << "A Runtime Error has occurred.\n"
                            << "Line: " << lineNumber[currentPC] << "\nError: !!!\n";
         return false;
     }
