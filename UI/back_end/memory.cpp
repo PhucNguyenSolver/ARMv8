@@ -117,9 +117,8 @@ void Memory::loadVariable(string raw)
         }
         else // TODO: add ascii
         {
-            string errorMessage = "Unknown data type: " + header;
+            string errorMessage = "unknown data type: " + header;
             throw errorMessage.c_str();
-            //            throw "Unknown data type: ";
         }
     }
 }
