@@ -39,11 +39,15 @@ public:
     CodeEditor *codeText;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_5;
+    QLabel *label_6;
+    QPushButton *testButton;
+    QPushButton *RunAll;
+    QLabel *label_7;
+    QLabel *label_5;
+    QPushButton *stepButton;
     QPushButton *assembleButton;
     QPushButton *resetButton;
-    QPushButton *testButton;
-    QPushButton *stepButton;
-    QPushButton *RunAll;
+    QLabel *label_8;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_3;
     QTableWidget *regTable;
@@ -52,8 +56,8 @@ public:
     QLabel *label_2;
     QLabel *label_3;
     QTextEdit *textEdit;
-    QTableWidget *labelTable;
     QLabel *label_4;
+    QTableWidget *labelTable;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -80,7 +84,7 @@ public:
         console->setMaximumSize(QSize(16777215, 150));
         console->setReadOnly(true);
 
-        gridLayout_4->addWidget(console, 2, 0, 1, 1);
+        gridLayout_4->addWidget(console, 3, 0, 1, 1);
 
         codeText = new CodeEditor(groupBox_4);
         codeText->setObjectName(QString::fromUtf8("codeText"));
@@ -88,15 +92,71 @@ public:
         font.setPointSize(12);
         codeText->setFont(font);
 
-        gridLayout_4->addWidget(codeText, 1, 0, 1, 1);
+        gridLayout_4->addWidget(codeText, 2, 0, 1, 1);
 
         groupBox_2 = new QGroupBox(groupBox_4);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         gridLayout_5 = new QGridLayout(groupBox_2);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        label_6 = new QLabel(groupBox_2);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        gridLayout_5->addWidget(label_6, 1, 2, 1, 1);
+
+        testButton = new QPushButton(groupBox_2);
+        testButton->setObjectName(QString::fromUtf8("testButton"));
+        testButton->setMaximumSize(QSize(100, 16777215));
+
+        gridLayout_5->addWidget(testButton, 0, 8, 1, 1);
+
+        RunAll = new QPushButton(groupBox_2);
+        RunAll->setObjectName(QString::fromUtf8("RunAll"));
+        RunAll->setMaximumSize(QSize(40, 50));
+        RunAll->setCursor(QCursor(Qt::PointingHandCursor));
+        RunAll->setStyleSheet(QString::fromUtf8("#RunAll {\n"
+"background-color: transparent;\n"
+"border-image: url(:runAll.png);\n"
+"background: none;\n"
+"border: none;\n"
+"background-repeat: none;\n"
+"}\n"
+"#RunAll:hover { \n"
+"	background-color:  yellow;\n"
+"	\n"
+" }"));
+
+        gridLayout_5->addWidget(RunAll, 0, 1, 1, 1);
+
+        label_7 = new QLabel(groupBox_2);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout_5->addWidget(label_7, 1, 6, 1, 1);
+
+        label_5 = new QLabel(groupBox_2);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        gridLayout_5->addWidget(label_5, 1, 1, 1, 1);
+
+        stepButton = new QPushButton(groupBox_2);
+        stepButton->setObjectName(QString::fromUtf8("stepButton"));
+        stepButton->setMaximumSize(QSize(40, 50));
+        stepButton->setCursor(QCursor(Qt::PointingHandCursor));
+        stepButton->setStyleSheet(QString::fromUtf8("#stepButton {\n"
+"background-color: transparent;\n"
+"border-image: url(:runStep.png);\n"
+"background: none;\n"
+"border: none;\n"
+"background-repeat: none;\n"
+"}\n"
+"#stepButton:hover { \n"
+"	background-color:  yellow;\n"
+" }"));
+
+        gridLayout_5->addWidget(stepButton, 0, 6, 1, 1);
+
         assembleButton = new QPushButton(groupBox_2);
         assembleButton->setObjectName(QString::fromUtf8("assembleButton"));
-        assembleButton->setMaximumSize(QSize(50, 30));
+        assembleButton->setMaximumSize(QSize(40, 50));
         assembleButton->setCursor(QCursor(Qt::PointingHandCursor));
         assembleButton->setStyleSheet(QString::fromUtf8("#assembleButton {\n"
 "background-color: transparent;\n"
@@ -110,11 +170,11 @@ public:
 "	\n"
 " }"));
 
-        gridLayout_5->addWidget(assembleButton, 0, 1, 1, 1);
+        gridLayout_5->addWidget(assembleButton, 0, 2, 1, 1);
 
         resetButton = new QPushButton(groupBox_2);
         resetButton->setObjectName(QString::fromUtf8("resetButton"));
-        resetButton->setMaximumSize(QSize(50, 30));
+        resetButton->setMaximumSize(QSize(40, 50));
         resetButton->setCursor(QCursor(Qt::PointingHandCursor));
         resetButton->setMouseTracking(false);
         resetButton->setTabletTracking(false);
@@ -133,48 +193,13 @@ public:
 ""));
         resetButton->setFlat(false);
 
-        gridLayout_5->addWidget(resetButton, 0, 3, 1, 1);
+        gridLayout_5->addWidget(resetButton, 0, 7, 1, 1);
 
-        testButton = new QPushButton(groupBox_2);
-        testButton->setObjectName(QString::fromUtf8("testButton"));
-        testButton->setMaximumSize(QSize(100, 16777215));
+        label_8 = new QLabel(groupBox_2);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setMaximumSize(QSize(35, 16777215));
 
-        gridLayout_5->addWidget(testButton, 0, 4, 1, 1);
-
-        stepButton = new QPushButton(groupBox_2);
-        stepButton->setObjectName(QString::fromUtf8("stepButton"));
-        stepButton->setMaximumSize(QSize(50, 30));
-        stepButton->setCursor(QCursor(Qt::PointingHandCursor));
-        stepButton->setStyleSheet(QString::fromUtf8("#stepButton {\n"
-"background-color: transparent;\n"
-"border-image: url(:runStep.png);\n"
-"background: none;\n"
-"border: none;\n"
-"background-repeat: none;\n"
-"}\n"
-"#stepButton:hover { \n"
-"	background-color:  yellow;\n"
-" }"));
-
-        gridLayout_5->addWidget(stepButton, 0, 2, 1, 1);
-
-        RunAll = new QPushButton(groupBox_2);
-        RunAll->setObjectName(QString::fromUtf8("RunAll"));
-        RunAll->setMaximumSize(QSize(50, 30));
-        RunAll->setCursor(QCursor(Qt::PointingHandCursor));
-        RunAll->setStyleSheet(QString::fromUtf8("#RunAll {\n"
-"background-color: transparent;\n"
-"border-image: url(:runAll.png);\n"
-"background: none;\n"
-"border: none;\n"
-"background-repeat: none;\n"
-"}\n"
-"#RunAll:hover { \n"
-"	background-color:  yellow;\n"
-"	\n"
-" }"));
-
-        gridLayout_5->addWidget(RunAll, 0, 0, 1, 1);
+        gridLayout_5->addWidget(label_8, 1, 7, 1, 1);
 
 
         gridLayout_4->addWidget(groupBox_2, 0, 0, 1, 1);
@@ -184,6 +209,7 @@ public:
 
         groupBox_3 = new QGroupBox(groupBox);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setMaximumSize(QSize(700, 16777215));
         gridLayout_3 = new QGridLayout(groupBox_3);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         regTable = new QTableWidget(groupBox_3);
@@ -373,6 +399,12 @@ public:
 
         gridLayout_3->addWidget(textEdit, 3, 4, 1, 1);
 
+        label_4 = new QLabel(groupBox_3);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setMaximumSize(QSize(100, 50));
+
+        gridLayout_3->addWidget(label_4, 3, 3, 1, 1);
+
         labelTable = new QTableWidget(groupBox_3);
         if (labelTable->columnCount() < 2)
             labelTable->setColumnCount(2);
@@ -382,6 +414,7 @@ public:
         labelTable->setHorizontalHeaderItem(1, __qtablewidgetitem36);
         labelTable->setObjectName(QString::fromUtf8("labelTable"));
         labelTable->setMinimumSize(QSize(200, 150));
+        labelTable->setMaximumSize(QSize(700, 16777215));
         labelTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         labelTable->setRowCount(0);
         labelTable->horizontalHeader()->setMinimumSectionSize(70);
@@ -389,12 +422,6 @@ public:
         labelTable->verticalHeader()->setVisible(false);
 
         gridLayout_3->addWidget(labelTable, 6, 0, 2, 2);
-
-        label_4 = new QLabel(groupBox_3);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setMaximumSize(QSize(100, 50));
-
-        gridLayout_3->addWidget(label_4, 3, 3, 1, 1);
 
 
         gridLayout_2->addWidget(groupBox_3, 0, 1, 1, 1);
@@ -405,7 +432,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1486, 21));
+        menubar->setGeometry(QRect(0, 0, 1486, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -423,6 +450,18 @@ public:
         groupBox_4->setTitle(QString());
         codeText->setPlainText(QString());
         groupBox_2->setTitle(QString());
+        label_6->setText(QCoreApplication::translate("MainWindow", "Assemble", nullptr));
+        testButton->setText(QCoreApplication::translate("MainWindow", "Test", nullptr));
+#if QT_CONFIG(tooltip)
+        RunAll->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Run-All</span></p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
+        RunAll->setText(QString());
+        label_7->setText(QCoreApplication::translate("MainWindow", "Run-Step", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Run-All", nullptr));
+#if QT_CONFIG(tooltip)
+        stepButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Run-Step</span></p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
+        stepButton->setText(QString());
 #if QT_CONFIG(tooltip)
         assembleButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">ASSEMBLE</span></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
@@ -434,15 +473,7 @@ public:
         resetButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Reset</span></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         resetButton->setText(QString());
-        testButton->setText(QCoreApplication::translate("MainWindow", "Test", nullptr));
-#if QT_CONFIG(tooltip)
-        stepButton->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Run-Step</span></p></body></html>", nullptr));
-#endif // QT_CONFIG(tooltip)
-        stepButton->setText(QString());
-#if QT_CONFIG(tooltip)
-        RunAll->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:10pt;\">Run-All</span></p></body></html>", nullptr));
-#endif // QT_CONFIG(tooltip)
-        RunAll->setText(QString());
+        label_8->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
         groupBox_3->setTitle(QString());
         QTableWidgetItem *___qtablewidgetitem = regTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
@@ -520,11 +551,11 @@ public:
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Register</span></p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Memory</span></p></body></html>", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Data</span></p></body></html>", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Memory Search", nullptr));
         QTableWidgetItem *___qtablewidgetitem34 = labelTable->horizontalHeaderItem(0);
         ___qtablewidgetitem34->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem35 = labelTable->horizontalHeaderItem(1);
         ___qtablewidgetitem35->setText(QCoreApplication::translate("MainWindow", "Address", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "Memory Search", nullptr));
     } // retranslateUi
 
 };

@@ -211,12 +211,12 @@ void MainWindow::updateMemoryTable() {
 }
 
 void MainWindow::updateLabelTable() {
-   map<string, int> mapLabel = p.getLabel();
+//   map<string, int> mapLabel = p.getLabel();
    map<string, int> mapData = p.getData();
-   int rowNum1 = mapLabel.size();
+//   int rowNum1 = mapLabel.size();
    int rowNum2 = mapData.size();
-   int rowNum = rowNum1 + rowNum2;
-   ui->labelTable->setRowCount(rowNum);
+//   int rowNum = rowNum1 + rowNum2;
+   ui->labelTable->setRowCount(rowNum2);
    int i = 0;
 //   for (std::map<string,int>::reverse_iterator rit=mapLabel.rbegin(); rit!=mapLabel.rend(); ++rit, ++i) {
 //       ui->labelTable->setItem(i, 0, new QTableWidgetItem(tr((rit->first).c_str())));
