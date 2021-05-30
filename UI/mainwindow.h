@@ -49,7 +49,7 @@ public:
 private slots:
 
     void on_RunAll_clicked();
-    void on_testButton_clicked();
+    //void on_testButton_clicked();
     void on_resetButton_clicked();
 
     void on_stepButton_clicked();

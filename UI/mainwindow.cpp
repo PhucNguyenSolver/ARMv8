@@ -111,30 +111,30 @@ void MainWindow::on_RunAll_clicked()
 
 
 
-void MainWindow::on_testButton_clicked()
-{
-    //    QLineEdit* a = new QLineEdit(" ",this);
-    //    a->showFullScreen();
-    //    ui->testButton->setDisabled(true);
-    //    for (int i = 0; i<10; i++) {
-    //    if(SIGNAL(a->editingFinished())) {
-    //      //  delete a;
-    //        ui->console->insertPlainText("a->displayText()");
-    //    }
-    //        ui->console->insertPlainText((to_string(i)).c_str());
-    //    }
-        //a->show();
-//    for (int i = 0; i<10; i++) {
-//    QString input = t.testGetInput();
-//    ui->console->insertPlainText(input);
-//    }
-    //t.testGetInput();
-   // ui->console->insertPlainText(t.testGetInput());
-//        QString text = "";
-//        while (text == "")
-//        text = QInputDialog::getText(this, tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
-//        ui->console->insertPlainText(text);
-}
+//void MainWindow::on_testButton_clicked()
+//{
+//    //    QLineEdit* a = new QLineEdit(" ",this);
+//    //    a->showFullScreen();
+//    //    ui->testButton->setDisabled(true);
+//    //    for (int i = 0; i<10; i++) {
+//    //    if(SIGNAL(a->editingFinished())) {
+//    //      //  delete a;
+//    //        ui->console->insertPlainText("a->displayText()");
+//    //    }
+//    //        ui->console->insertPlainText((to_string(i)).c_str());
+//    //    }
+//        //a->show();
+////    for (int i = 0; i<10; i++) {
+////    QString input = t.testGetInput();
+////    ui->console->insertPlainText(input);
+////    }
+//    //t.testGetInput();
+//   // ui->console->insertPlainText(t.testGetInput());
+////        QString text = "";
+////        while (text == "")
+////        text = QInputDialog::getText(this, tr("QInputDialog::getText()"),tr(""), QLineEdit::Normal);
+////        ui->console->insertPlainText(text);
+//}
 
 
 void MainWindow::on_resetButton_clicked()
@@ -177,7 +177,11 @@ void MainWindow::on_assembleButton_clicked()
     if(checkAssemble) {return;}
     p.reset();
     printOutput("Assembling...\n");
-    p.setSource((ui->codeText->toPlainText()).toStdString());
+    if((ui->codeText->toPlainText()).toStdString() == "") {
+        printOutput("Empty File!!!!!!!\n");
+        return;
+   }
+   p.setSource((ui->codeText->toPlainText()).toStdString());
 
     if(!p.assembleSuccessfully())
     {
