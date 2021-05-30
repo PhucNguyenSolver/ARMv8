@@ -106,8 +106,8 @@ bool Program::executeSuccessfully(int instructionId)
     }
     catch (...)
     {
-        MainWindow::buffer << "A Runtime Error has occurred.\n"
-                           << "Line: " << lineNumber[currentPC] << "\nError: !!!\n";
+        MainWindow::buffer << "A Runtime Error has occurred at line " << lineNumber[currentPC] + 1 << ":\n"
+                           << "[" << instructions[currentPC]->s << "]\n"; // TODO: should be source.lineNumber instead
         return false;
     }
     return true;
