@@ -79,6 +79,7 @@ bool Program::assembleSuccessfully()
         {
             MainWindow::buffer << "Unknown instruction at line "
                                << source.lineNumber[i] + 1 << ": "
+                               << source.instructions[i] << endl
                                << msg << endl;
             return false;
         }
@@ -102,12 +103,14 @@ bool Program::executeSuccessfully(int instructionId)
     try
     {
         hardware->PC++;
+        MainWindow::buffer << instructions[currentPC]->s << "\n";
+        MainWindow::printOutput();
         instructions[currentPC]->execute();
     }
     catch (...)
     {
-        MainWindow::buffer << "A Runtime Error has occurred.\n"
-                           << "Line: " << lineNumber[currentPC] << "\nError: !!!\n";
+        MainWindow::buffer << "A Runtime Error has occurred at line " << lineNumber[currentPC] + 1 << ":\n"
+                           << "[" << instructions[currentPC]->s << "]\n"; // TODO: should be source.lineNumber instead
         return false;
     }
     return true;

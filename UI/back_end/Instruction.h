@@ -28,6 +28,7 @@ public:
 
 protected:
     Hardware *hardware;
+public:
     string s;
 };
 /*-----------------------------*/
