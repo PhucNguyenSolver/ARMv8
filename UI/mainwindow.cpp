@@ -139,6 +139,7 @@ void MainWindow::on_RunAll_clicked()
 
 void MainWindow::on_resetButton_clicked()
 {
+    if(!checkAssemble) return;
     this->highlightLine(ui->codeText, -1, p.getLineNumber(p.getPC()));
     checkAssemble = false;
     p.reset();
@@ -235,9 +236,16 @@ void MainWindow::updateLabelTable() {
 void MainWindow::on_textEdit_textChanged() {
 //    if(ui->textEdit->toPl
     QString textEdit = ui->textEdit->toPlainText();
+//    if(textEdit.contains("\n")) {
+//        textEdit.clear();
+//        ui->textEdit->clear();
+//    }
     ui->memTable->item(preNum/16, preNum%16)->setBackground(Qt::white);
     if(textEdit.isEmpty()) return;
-    int num = preNum = textEdit.toInt();
-    ui->memTable->item(num/16, num%16)->setBackground(Qt::gray);
+    int num = textEdit.toInt();
+    if(num >= 0) {
+        preNum = num;
+        ui->memTable->item(num/16, num%16)->setBackground(Qt::gray);
+    }
 }
 

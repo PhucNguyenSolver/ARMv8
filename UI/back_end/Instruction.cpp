@@ -350,7 +350,7 @@ RInstruction ::RInstruction(Hardware *hardware, string s) : Instruction(hardware
     string command = tokensList[0];
     
     string errorMessage = "invalid register ";
-    if (command != "BR")
+    if (command == "BR")
     {
         my_assert(tokensList.size() == 2, "invalid number of arguments");
         my_assert(validRegisterName(tokensList[1]));
@@ -377,7 +377,7 @@ IInstruction ::IInstruction(Hardware *hardware, string s) : Instruction(hardware
 
     try
     {
-        number = stoi(tokensList[3]);
+        int number = stoi(tokensList[3]);
     }
     catch(...)
     {
