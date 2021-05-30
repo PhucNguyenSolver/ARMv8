@@ -79,6 +79,7 @@ bool Program::assembleSuccessfully()
         {
             MainWindow::buffer << "Unknown instruction at line "
                                << source.lineNumber[i] + 1 << ": "
+                               << source.instructions[i] << endl
                                << msg << endl;
             return false;
         }
@@ -102,6 +103,8 @@ bool Program::executeSuccessfully(int instructionId)
     try
     {
         hardware->PC++;
+        MainWindow::buffer << instructions[currentPC]->s << "\n";
+        MainWindow::printOutput();
         instructions[currentPC]->execute();
     }
     catch (...)

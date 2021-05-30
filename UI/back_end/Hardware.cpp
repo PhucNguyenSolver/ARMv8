@@ -84,6 +84,13 @@ int Hardware::indexOf(string reg_name)
         int i = -1;
         ss >> i;
         return i;
+        // if (i >= 0 && i < 32)
+        //     return i;
+        // else
+        // {
+        //     string errorMessage = (string) "invalid register [" + reg_name + "]";
+        //     throw errorMessage.c_str();
+        // }
     }
 }
 

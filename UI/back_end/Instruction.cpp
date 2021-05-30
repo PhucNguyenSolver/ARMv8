@@ -10,7 +10,14 @@
 #include "Utils.h"
 #include "Instruction.h"
 
+inline bool validRegisterName(string registerName)
+{
+    int index = Hardware::indexOf(registerName);
+    return index != -1;
+}
 
+inline void my_assert(bool cond, string errorMessage = "exception") 
+{ if (!cond) throw errorMessage.c_str(); }
 inline long sys_rand() { return ((long)rand() << 32) | rand(); }
 
 Instruction::Instruction(string s)
@@ -99,7 +106,7 @@ void DInstruction::Store(char *des, char *source, int n, int size)
 
 void RInstruction::execute()
 {
-
+    // Old version below may throw exception on invalid register
     vector<string> insWord = Parsing::parseTokens(s);
     if (!insWord[0].compare("ADD") || !insWord[0].compare("ADDS"))
     {
@@ -336,11 +343,79 @@ void DInstruction::execute()
 
 /*-----------------------------*/
 
-RInstruction ::RInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-IInstruction ::IInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
+RInstruction ::RInstruction(Hardware *hardware, string s) : Instruction(hardware, s) 
+{
+    // ----- catch error
+    vector<string> tokensList = Parsing::parseTokens(s);
+    string command = tokensList[0];
+    
+    string errorMessage = "invalid register ";
+    if (command != "BR")
+    {
+        my_assert(tokensList.size() == 2, "invalid number of arguments");
+        my_assert(validRegisterName(tokensList[1]));
+    }
+    else
+    {
+        my_assert(tokensList.size() == 4, "invalid number of arguments");
+        my_assert(validRegisterName(tokensList[1]), errorMessage + tokensList[1]);
+        my_assert(validRegisterName(tokensList[2]), errorMessage + tokensList[2]);
+        my_assert(validRegisterName(tokensList[3]), errorMessage + tokensList[3]);
+    }
+}
+
+IInstruction ::IInstruction(Hardware *hardware, string s) : Instruction(hardware, s) 
+{
+    // ----- catch error
+    // ----- format I: R R num
+    vector<string> tokensList = Parsing::parseTokens(s);
+    string errorMessage = "invalid register ";
+
+    my_assert(tokensList.size() == 4, "invalid number of arguments");
+    my_assert(validRegisterName(tokensList[1]), errorMessage + tokensList[1]);
+    my_assert(validRegisterName(tokensList[2]), errorMessage + tokensList[2]);
+
+    try
+    {
+        number = stoi(tokensList[3]);
+    }
+    catch(...)
+    {
+        string errorMessage = (string) "invalid arguments [";
+        errorMessage += tokensList[3];
+        errorMessage += (string) "] a number expexcted";
+        throw errorMessage.c_str();
+    }
+}
+
+BInstruction ::BInstruction(Hardware *hardware, string s) : Instruction(hardware, s) 
+{
+    vector<string> tokensList = Parsing::parseTokens(s);
+    my_assert(tokensList.size() == 2, "invalid number of arguments");
+    if (PreProcess::label.find(tokensList[1]) == PreProcess::label.end())
+        throw "label not found";
+}
+
+CBInstruction ::CBInstruction(Hardware *hardware, string s) : Instruction(hardware, s) 
+{
+    vector<string> tokensList = Parsing::parseTokens(s);
+    string command = tokensList[0];
+
+    if (command == "CBZ" || command == "CBNZ")
+    {
+        my_assert(tokensList.size() == 3, "invalid number of arguments");
+        if (PreProcess::label.find(tokensList[2]) == PreProcess::label.end())
+            throw "label not found";
+    }
+    else
+    {
+        my_assert(tokensList.size() == 2, "invalid number of arguments");
+        if (PreProcess::label.find(tokensList[1]) == PreProcess::label.end())
+            throw "label not found";
+    }
+}
+
 DInstruction ::DInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-BInstruction ::BInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
-CBInstruction ::CBInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
 PIInstruction ::PIInstruction(Hardware *hardware, string s) : DInstruction(hardware, s) {}
 SyscallInstruction::SyscallInstruction(Hardware *hardware, string s) : Instruction(hardware, s) {}
 
